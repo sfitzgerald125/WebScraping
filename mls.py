@@ -9,7 +9,6 @@ with open('test_source.html') as html_file:
 
 # soup = BeautifulSoup(source, 'lxml')
 
-
 # find all td's
 td = soup.find_all('td')
 
@@ -105,6 +104,21 @@ wthdrwn_dt = td[250].text
 off_mkt_dt = td[252].text
 exp_dt = td[254].text
 
+total_sqfoot = td[96].text
+total_bedrooms = td[97].text
+total_bath_full = td[98].text
+total_bath_three_fourth = td[99].text
+total_bath_half = td[100].text
+total_family = td[101].text
+total_den = td[102].text
+total_formal_living_room = td[103].text
+total_kitchen_k = td[104].text
+total_kitchen_b = td[105].text
+total_kitchen_f = td[106].text
+total_kitchen_s = td[107].text
+total_laundry = td[108].text
+total_fireplace = td[109].text
+
 DATA = [
     mls_num,
     num_pictures,
@@ -193,6 +207,21 @@ DATA = [
     off_mkt_dt,
     exp_dt,
 
+    total_sqfoot,
+    total_bedrooms,
+    total_bath_full,
+    total_bath_three_fourth,
+    total_bath_half,
+    total_family,
+    total_den,
+    total_formal_living_room,
+    total_kitchen_k,
+    total_kitchen_b,
+    total_kitchen_f,
+    total_kitchen_s,
+    total_laundry,
+    total_fireplace,
+    
     # lvl4_sqfoot,
     # lvl4_bedrooms,
     # lvl4_bath_full,
@@ -252,21 +281,6 @@ DATA = [
     # lvl1_kitchen_s,
     # lvl1_laundry,
     # lvl1_fireplace,
-    
-    # total_sqfoot,
-    # total_bedrooms,
-    # total_bath_full,
-    # total_bath_three_fourth,
-    # total_bath_half,
-    # total_family,
-    # total_den,
-    # total_formal_living_room,
-    # total_kitchen_k,
-    # total_kitchen_b,
-    # total_kitchen_f,
-    # total_kitchen_s,
-    # total_laundry,
-    # total_fireplace,
 ]
 
 i = 0
