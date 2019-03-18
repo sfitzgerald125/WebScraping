@@ -9,11 +9,12 @@ with open('test_source.html') as html_file:
 
 # soup = BeautifulSoup(source, 'lxml')
 
-mls_num = soup.div.find('h2', class_='mls-no').text
 
 # find all td's
 td = soup.find_all('td')
+
 #start assigning vars
+mls_num = soup.div.find('h2', class_='mls-no').text
 num_pictures = td[4].text
 list_price = td[7].text
 price_perANDoriginal_list_price = td[11].text.strip()
@@ -29,7 +30,7 @@ county = td[29].text
 restrictions = td[31].text
 subdivision = td[33].text
 taxes = td[35].text
-zoning = td[39].text
+zoning1 = td[39].text
 has_hoa = td[41].text
 hoa_transfer = td[43].text
 hoa_amenities = td[49].text
@@ -39,8 +40,6 @@ elem = td[55].text
 jr_high = td[57].text
 sr_high = td[59].text
 other_school = td[61].text
-
-# home specs will be better to grab from separate var
 
 htype = td[112].text
 style = td[114].text
@@ -109,68 +108,63 @@ exp_dt = td[254].text
 DATA = [
     mls_num,
     num_pictures,
-
-# table 1
     list_price,
     price_perANDoriginal_list_price,
     status,
     cdom,
+    list_date,
     dom,
     address,
+    area,
     city,
     county,
-    subdivision,
-    zoning,
-    hoa_transfer,
-    pre_market,
-    status,
-    list_date,
-    area,
     restrictions,
+    subdivision,
     taxes,
+    zoning1,
     has_hoa,
-
+    hoa_transfer,
+    hoa_amenities,
+    pre_market,
     school_dist,
     elem,
     jr_high,
     sr_high,
     other_school,
-
     htype,
     style,
     year_built,
-    effect_yr_built,
-    deck_patio,
-    garage,
-    carport,
-    prkg_sp,
-    fin_bsmt,
-    bsmt,
-    garage_park,
-    driveway,
-    water,
-    water_shares,
-    spa,
-    community_pool,
-    master_level,
-    senior_comm,
-    animals,
     const_status,
+    effect_yr_built,
     acres,
+    deck_patio,
     frontage,
+    garage,
     side,
+    carport,
     back,
+    prkg_sp,
     irregular,
-    
+    fin_bsmt,
     roof,
+    bsmt,
     heating,
+    garage_park,
     air_cond,
+    driveway,
     floor,
+    water,
     window_cov,
+    water_shares,
     has_pool,
+    has_spa,
+    community_pool,
     pool_feat,
+    master_level,
     possession,
+    senior_comm,
     exterior,
+    animals,
     has_solar,
     landscape,
     lot_facts,
@@ -182,12 +176,11 @@ DATA = [
     storage,
     access_feat,
     utilities,
-    zoning,
+    zoning2,
     remarks,
     agt_remarks,
     hoa_remarks,
     show_inst,
-
     owner,
     owner_type,
     contact,
@@ -196,6 +189,9 @@ DATA = [
     dual_var,
     list_type,
     comm_type,
+    wthdrwn_dt,
+    off_mkt_dt,
+    exp_dt,
 
     # lvl4_sqfoot,
     # lvl4_bedrooms,
@@ -273,4 +269,8 @@ DATA = [
     # total_fireplace,
 ]
 
+i = 0
+for data in DATA:
+    print(i, data)
+    i += 1
 # csv_file.close()
