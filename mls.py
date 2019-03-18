@@ -3,7 +3,7 @@ import re
 import requests
 import csv
 
-with open('test4.html') as html_file:
+with open('test3.html') as html_file:
     soup = BeautifulSoup(html_file, 'lxml')
 
 # start assigning vars
@@ -41,7 +41,6 @@ sr_high = table2.find(string=re.compile("Sr High:")).find_next("td").text
 #table3 vars
 table3 = table2.find_next('table')
 td_finder = table3.find(string=re.compile("Tot"))
-
 total_sqfoot = td_finder.find_next("td")
 total_bedrooms = total_sqfoot.find_next("td")
 total_bath_full = total_bedrooms.find_next("td")
@@ -57,75 +56,99 @@ total_kitchen_s = total_kitchen_f.find_next("td")
 total_laundry = total_kitchen_s.find_next("td")
 total_fireplace = total_laundry.find_next("td")
 
+# table4 vars
+table4 = table3.find_next('table').find_next("table")
+htype = table4.find(string=re.compile("Type:")).find_next("td").text
+style = table4.find(string=re.compile("Style")).find_next("td").text
+year_built = table4.find(string=re.compile("Year Built:")).find_next("td").text.strip()
+const_status = table4.find(string=re.compile("Const Status:")).find_next("td").text.strip()
+effect_yr_built = table4.find(string=re.compile("Effect Yr Blt:")).find_next("td").text
+acres = table4.find(string=re.compile("Acres:")).find_next("td").text
+deck_patio = table4.find(string=re.compile("Deck")).find_next("td").text
+frontage = table4.find(string=re.compile("Frontage:")).find_next("td").text
+garage = table4.find(string=re.compile("Garage:")).find_next("td").text
+side = table4.find(string=re.compile("Side:")).find_next("td").text
+carport = table4.find(string=re.compile("Carport")).find_next("td").text
+back = table4.find(string=re.compile("Back:")).find_next("td").text
+prkg_sp = table4.find(string=re.compile("Prkg Sp")).find_next("td").text
+irregular = table4.find(string=re.compile("Irregular")).find_next("td").text
+fin_bsmt = table4.find(string=re.compile("Fin Bsmt")).find_next("td").text
+
+# table5 vars
+table5 = table4.find_next("table")
+roof = table5.find(string=re.compile("Roof:")).find_next("td").text
+bsmt = table5.find(string=re.compile("Basement:")).find_next("td").text
+heating = table5.find(string=re.compile("Heating:")).find_next("td").text
+garage_park = table5.find(string=re.compile("Garage/Park:")).find_next("td").text
+air_cond = table5.find(string=re.compile("Air Cond:")).find_next("td").text
+driveway = table5.find(string=re.compile("Driveway:")).find_next("td").text
+floor = table5.find(string=re.compile("Floor:")).find_next("td").text
+water = table5.find(string=re.compile("Water:")).find_next("td").text
+window_cov = table5.find(string=re.compile("Window Cov:")).find_next("td").text
+water_shares = table5.find(string=re.compile("Water Shares:")).find_next("td").text
+has_pool = table5.find(string=re.compile("Pool\?")).find_next("td").text
+has_spa = table5.find(string=re.compile("Spa\?")).find_next("td").text
+community_pool = table5.find(string=re.compile("Community Pool\?")).find_next("td").text
+pool_feat = table5.find(string=re.compile("Pool Feat:")).find_next("td").text
+master_level = table5.find(string=re.compile("Master Level:")).find_next("td").text
+possession = table5.find(string=re.compile("Possession")).find_next("td").text
+senior_comm = table5.find(string=re.compile("Senior Comm:")).find_next("td").text
+exterior = table5.find(string=re.compile("Exterior")).find_next("td").text
+animals = table5.find(string=re.compile("Animals:")).find_next("td").text
+has_solar = table5.find(string=re.compile("Has Solar\?")).find_next("td").text
+
+# table6 vars
+table6 = table5.find_next("table")
+landscape = table6.find(string=re.compile("Landscape")).find_next("td").text
+lot_facts = table6.find(string=re.compile("Lot Facts")).find_next("td").text
+inclusions = table6.find(string=re.compile("Inclusions")).find_next("td").text
+terms = table6.find(string=re.compile("Terms")).find_next("td").text
+storage = table6.find(string=re.compile("Storage")).find_next("td").text
+utilities = table6.find(string=re.compile("Utilities")).find_next("td").text
+zoning2 = table6.find(string=re.compile("Zoning:")).find_next("td").text
+remarks = table6.find(string=re.compile("Remarks")).find_next("td").text
+
+# table7 vars
+table7 = table6.find_next("table")
+show_inst = table7.find(string=re.compile("Show Inst:")).find_next("td").text
+owner = table7.find(string=re.compile("Owner")).find_next("td").text
+owner_type = table7.find(string=re.compile("Owner Type:")).find_next("td").text
+contact = table7.find(string=re.compile("Contact:")).find_next("td").text
+contact_type = table7.find(string=re.compile("Contact Type:")).find_next("td").text
+l_agent = table7.find(string=re.compile("L.Agent")).find_next("td").text
+l_office = table7.find(string=re.compile("L.Office:")).find_next("td").text
+l_broker = table7.find(string=re.compile("L.Broker")).find_next("td").text
+
+# table8 vars
+table8 = table7.find_next("table")
+bac = table8.find(string=re.compile("BAC:")).find_next("td").text
+dual_var = table8.find(string=re.compile("Dual.Var:")).find_next("td").text
+list_type = table8.find(string=re.compile("List Type:")).find_next("td").text
+comm_type = table8.find(string=re.compile("Comm Type:")).find_next("td").text
+wthdrwn_dt = table8.find(string=re.compile("Wthdrwn Dt:")).find_next("td").text
+off_mkt_dt = table8.find(string=re.compile("Off Mkt Dt:")).find_next("td").text
+exp_dt = table8.find(string=re.compile("Exp Dt:")).find_next("td").text
+
+# table9 vars
+table9 = table8.find_next("table")
+print(soup.prettify())
+# print(f'bac {bac}')
+# print(f'dual_var {dual_var}')
+# print(f'list_type {list_type}')
+# print(f'comm_type {comm_type}')
+# print(f'wthdrwn_dt {wthdrwn_dt}')
+# print(f'off_mkt_dt {off_mkt_dt}')
+# print(f'exp_dt {exp_dt}')
 
 
-print(total_fireplace)
-# .find_next("td")
-
-
-# htype = td[112].text
-# style = td[114].text
-# year_built = td[116].text.strip()
-# const_status = td[118].text
-# effect_yr_built = td[120].text
-# acres = td[122].text
-# deck_patio = td[124].text
-# frontage = td[126].text
-# garage = td[128].text
-# side = td[130].text
-# carport = td[132].text
-# back = td[134].text
-# prkg_sp = td[136].text
-# irregular = td[138].text
-# fin_bsmt = td[140].text
-
-# roof = td[144].text
-# bsmt = td[146].text
-# heating = td[148].text
-# garage_park = td[150].text
-# air_cond = td[152].text
-# driveway = td[154].text
-# floor = td[156].text
-# water = td[158].text
-# window_cov = td[160].text
-# water_shares = td[162].text
-# has_pool = td[164].text
-# has_spa = td[166].text
-# community_pool = td[166].text
-# pool_feat = td[168].text
-# master_level = td[170].text
-# possession = td[172].text
-# senior_comm = td[174].text
-# exterior = td[176].text
-# animals = td[178].text
-# has_solar = td[180].text
-# landscape = td[182].text
-# lot_facts = td[184].text
-# exterior_feat = td[186].text
-# interior_feat = td[188].text
-# amenities = td[190].text
-# inclusions = td[192].text
-# terms = td[194].text
-# storage = td[196].text
-# access_feat = td[198].text
-# utilities = td[200].text
-# zoning2 = td[202].text
-# remarks = td[204].text
-# agt_remarks = td[206].text
+# exterior_feat = table6.find(string=re.compile(I)).find_next("td").text
+# interior_feat = table6.find(string=re.compile()).find_next("td").text
+# amenities = table6.find(string=re.compile()).find_next("td").text
+# access_feat = table6.find(string=re.compile()).find_next("td").text
+# agt_remarks = table6.find(string=re.compile()).find_next("td").text
 # hoa_remarks = td[208].text
-# show_inst = td[210].text
 
-# owner = td[214].text
-# owner_type = td[216].text
-# contact = td[218].text
-# contact_type = td[220].text
-# bac = td[242].text
-# dual_var = td[244].text
-# list_type = td[246].text
-# comm_type = td[248].text
-# wthdrwn_dt = td[250].text
-# off_mkt_dt = td[252].text
-# exp_dt = td[254].text
+
 
 DATA = [
     mls_num,
@@ -148,58 +171,77 @@ DATA = [
     hoa_transfer,
     hoa_amenities,
     pre_market,
-    # school_dist,
-    # elem,
-    # jr_high,
-    # sr_high,
-    # other_school,
-    # htype,
-    # style,
-    # year_built,
-    # const_status,
-    # effect_yr_built,
-    # acres,
-    # deck_patio,
-    # frontage,
-    # garage,
-    # side,
-    # carport,
-    # back,
-    # prkg_sp,
-    # irregular,
-    # fin_bsmt,
-    # roof,
-    # bsmt,
-    # heating,
-    # garage_park,
-    # air_cond,
-    # driveway,
-    # floor,
-    # water,
-    # window_cov,
-    # water_shares,
-    # has_pool,
-    # has_spa,
-    # community_pool,
-    # pool_feat,
-    # master_level,
-    # possession,
-    # senior_comm,
-    # exterior,
-    # animals,
-    # has_solar,
-    # landscape,
-    # lot_facts,
+
+    school_dist,
+    elem,
+    jr_high,
+    sr_high,
+
+    total_sqfoot.text,
+    total_bedrooms.text,
+    total_bath_full.text,
+    total_bath_three_fourth.text,
+    total_bath_half.text,
+    total_family.text,
+    total_den.text,
+    total_formal_living_room.text,
+    total_kitchen_k.text,
+    total_kitchen_b.text,
+    total_kitchen_f.text,
+    total_kitchen_s.text,
+    total_laundry.text,
+    total_fireplace.text,
+
+    htype,
+    style,
+    year_built,
+    const_status,
+    effect_yr_built,
+    acres,
+    deck_patio,
+    frontage,
+    garage,
+    side,
+    carport,
+    back,
+    prkg_sp,
+    irregular,
+    fin_bsmt,
+
+    roof,
+    bsmt,
+    heating,
+    garage_park,
+    air_cond,
+    driveway,
+    floor,
+    water,
+    window_cov,
+    water_shares,
+    has_pool,
+    has_spa,
+    community_pool,
+    pool_feat,
+    master_level,
+    possession,
+    senior_comm,
+    exterior,
+    animals,
+    has_solar,
+
+    landscape,
+    lot_facts,
+    inclusions,
+    terms,
+    storage,
+    utilities,
+    zoning2,
+    remarks,
+
     # exterior_feat,
     # interior_feat,
     # amenities,
-    # inclusions,
-    # terms,
-    # storage,
     # access_feat,
-    # utilities,
-    # zoning2,
-    # remarks,
     # agt_remarks,
     # hoa_remarks,
     # show_inst,
@@ -214,80 +256,6 @@ DATA = [
     # wthdrwn_dt,
     # off_mkt_dt,
     # exp_dt,
-
-    # total_sqfoot,
-    # total_bedrooms,
-    # total_bath_full,
-    # total_bath_three_fourth,
-    # total_bath_half,
-    # total_family,
-    # total_den,
-    # total_formal_living_room,
-    # total_kitchen_k,
-    # total_kitchen_b,
-    # total_kitchen_f,
-    # total_kitchen_s,
-    # total_laundry,
-    # total_fireplace,
-    # lvl4_sqfoot,
-    # lvl4_bedrooms,
-    # lvl4_bath_full,
-    # lvl4_bath_three_fourth,
-    # lvl4_bath_half,
-    # lvl4_family,
-    # lvl4_den,
-    # lvl4_formal_living_room,
-    # lvl4_kitchen_k,
-    # lvl4_kitchen_b,
-    # lvl4_kitchen_f,
-    # lvl4_kitchen_s,
-    # lvl4_laundry,
-    # lvl4_fireplace,
-
-    # lvl3_sqfoot,
-    # lvl3_bedrooms,
-    # lvl3_bath_full,
-    # lvl3_bath_three_fourth,
-    # lvl3_bath_half,
-    # lvl3_family,
-    # lvl3_den,
-    # lvl3_formal_living_room,
-    # lvl3_kitchen_k,
-    # lvl3_kitchen_b,
-    # lvl3_kitchen_f,
-    # lvl3_kitchen_s,
-    # lvl3_laundry,
-    # lvl3_fireplace,
-    
-    # lvl2_sqfoot,
-    # lvl2_bedrooms,
-    # lvl2_bath_full,
-    # lvl2_bath_three_fourth,
-    # lvl2_bath_half,
-    # lvl2_family,
-    # lvl2_den,
-    # lvl2_formal_living_room,
-    # lvl2_kitchen_k,
-    # lvl2_kitchen_b,
-    # lvl2_kitchen_f,
-    # lvl2_kitchen_s,
-    # lvl2_laundry,
-    # lvl2_fireplace,
-    
-    # lvl1_sqfoot,
-    # lvl1_bedrooms,
-    # lvl1_bath_full,
-    # lvl1_bath_three_fourth,
-    # lvl1_bath_half,
-    # lvl1_family,
-    # lvl1_den,
-    # lvl1_formal_living_room,
-    # lvl1_kitchen_k,
-    # lvl1_kitchen_b,
-    # lvl1_kitchen_f,
-    # lvl1_kitchen_s,
-    # lvl1_laundry,
-    # lvl1_fireplace,
 ]
 
 # for data in DATA:
