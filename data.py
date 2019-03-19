@@ -3,7 +3,6 @@ import re
 
 def set_variables(soup):
     default_value = None
-
     # start assigning vars
     try:
         mls_num = soup.find('h2', class_='mls-no').text
