@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import csv
+import functions
 
 source = requests.get('http://coreyms.com').text
 
