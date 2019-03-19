@@ -6,6 +6,7 @@ import csv
 with open('test3.html') as html_file:
     soup = BeautifulSoup(html_file, 'lxml')
 
+    
 # start assigning vars
 mls_num = soup.find('h2', class_='mls-no').text
 num_pictures = soup.find('span', class_='slide-of').text
@@ -101,12 +102,17 @@ has_solar = table5.find(string=re.compile("Has Solar\?")).find_next("td").text
 table6 = table5.find_next("table")
 landscape = table6.find(string=re.compile("Landscape")).find_next("td").text
 lot_facts = table6.find(string=re.compile("Lot Facts")).find_next("td").text
+exterior_feat = table6.find(string=re.compile("Exterior Feat:")).find_next("td").text
+interior_feat = table6.find(string=re.compile("Interior Feat:")).find_next("td").text
+amenities = table6.find(string=re.compile("Amenities:")).find_next("td").text
 inclusions = table6.find(string=re.compile("Inclusions")).find_next("td").text
 terms = table6.find(string=re.compile("Terms")).find_next("td").text
 storage = table6.find(string=re.compile("Storage")).find_next("td").text
+access_feat = table6.find(string=re.compile("Access Feat:")).find_next("td").text
 utilities = table6.find(string=re.compile("Utilities")).find_next("td").text
 zoning2 = table6.find(string=re.compile("Zoning:")).find_next("td").text
 remarks = table6.find(string=re.compile("Remarks")).find_next("td").text
+agt_remarks = table6.find(string=re.compile("Agt Remarks:")).find_next("td").text
 
 # table7 vars
 table7 = table6.find_next("table")
@@ -128,26 +134,6 @@ comm_type = table8.find(string=re.compile("Comm Type:")).find_next("td").text
 wthdrwn_dt = table8.find(string=re.compile("Wthdrwn Dt:")).find_next("td").text
 off_mkt_dt = table8.find(string=re.compile("Off Mkt Dt:")).find_next("td").text
 exp_dt = table8.find(string=re.compile("Exp Dt:")).find_next("td").text
-
-# table9 vars
-table9 = table8.find_next("table")
-print(soup.prettify())
-# print(f'bac {bac}')
-# print(f'dual_var {dual_var}')
-# print(f'list_type {list_type}')
-# print(f'comm_type {comm_type}')
-# print(f'wthdrwn_dt {wthdrwn_dt}')
-# print(f'off_mkt_dt {off_mkt_dt}')
-# print(f'exp_dt {exp_dt}')
-
-
-# exterior_feat = table6.find(string=re.compile(I)).find_next("td").text
-# interior_feat = table6.find(string=re.compile()).find_next("td").text
-# amenities = table6.find(string=re.compile()).find_next("td").text
-# access_feat = table6.find(string=re.compile()).find_next("td").text
-# agt_remarks = table6.find(string=re.compile()).find_next("td").text
-# hoa_remarks = td[208].text
-
 
 
 DATA = [
@@ -237,29 +223,34 @@ DATA = [
     utilities,
     zoning2,
     remarks,
+    exterior_feat,
+    interior_feat,
+    amenities,
+    access_feat,
+    agt_remarks,
 
-    # exterior_feat,
-    # interior_feat,
-    # amenities,
-    # access_feat,
-    # agt_remarks,
-    # hoa_remarks,
-    # show_inst,
-    # owner,
-    # owner_type,
-    # contact,
-    # contact_type,
-    # bac,
-    # dual_var,
-    # list_type,
-    # comm_type,
-    # wthdrwn_dt,
-    # off_mkt_dt,
-    # exp_dt,
+
+
+    show_inst,
+    owner,
+    owner_type,
+    contact,
+    contact_type,
+    l_agent,
+    l_office,
+    l_broker,
+
+    bac,
+    dual_var,
+    list_type,
+    comm_type,
+    wthdrwn_dt,
+    off_mkt_dt,
+    exp_dt,
 ]
 
-# for data in DATA:
-#     print(data)
+for data in DATA:
+    print(data)
 # csv_writer.writerow(DATA)
 
 # csv_file.close()
