@@ -1,17 +1,17 @@
 from bs4 import BeautifulSoup
 import requests
 import csv
-import scrape
+import classes
 import re
 
-URLS = []
-
+myScraper = classes.scrappy()
 
 i = 0
 while i < 2:
-    URLS = scrape.grab_urls('list.html', URLS)
-    print(len(URLS))
+    myScraper.update_next_page()
+    print(myScraper.next_page)
     i += 1
+
 
 # with open('list.html') as list_html:
 #     soup = BeautifulSoup(list_html, 'lxml')
