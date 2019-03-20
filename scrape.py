@@ -1,12 +1,126 @@
 from bs4 import BeautifulSoup
 import re
 
+ROWS = [
+        'mls_num',
+        'num_pictures',
+        'list_price',
+        'price_perANDoriginal_list_price',
+        'status',
+        'cdom',
+        'list_date',
+        'dom',
+        'address',
+        'area',
+        'city',
+        'county',
+        'restrictions',
+        'subdivision',
+        'taxes',
+        'zoning1',
+        'has_hoa',
+        'hoa_transfer',
+        'hoa_amenities',
+        'pre_market',
+        'school_dist',
+        'elem',
+        'jr_high',
+        'sr_high',
+        'total_sqfoot.text',
+        'total_bedrooms.text',
+        'total_bath_full.text',
+        'total_bath_three_fourth.text',
+        'total_bath_half.text',
+        'total_family.text',
+        'total_den.text',
+        'total_formal_living_room.text',
+        'total_kitchen_k.text',
+        'total_kitchen_b.text',
+        'total_kitchen_f.text',
+        'total_kitchen_s.text',
+        'total_laundry.text',
+        'total_fireplace.text',
+        'htype',
+        'style',
+        'year_built',
+        'const_status',
+        'effect_yr_built',
+        'acres',
+        'deck_patio',
+        'frontage',
+        'garage',
+        'side',
+        'carport',
+        'back',
+        'prkg_sp',
+        'irregular',
+        'fin_bsmt',
+        'roof',
+        'bsmt',
+        'heating',
+        'garage_park',
+        'air_cond',
+        'driveway',
+        'floor',
+        'water',
+        'window_cov',
+        'water_shares',
+        'has_pool',
+        'has_spa',
+        'community_pool',
+        'pool_feat',
+        'master_level',
+        'possession',
+        'senior_comm',
+        'exterior',
+        'animals',
+        'has_solar',
+        'landscape',
+        'lot_facts',
+        'inclusions',
+        'terms',
+        'storage',
+        'utilities',
+        'zoning2',
+        'remarks',
+        'exterior_feat',
+        'interior_feat',
+        'amenities',
+        'access_feat',
+        'agt_remarks',
+        'show_inst',
+        'owner',
+        'owner_type',
+        'contact',
+        'contact_type',
+        'l_agent',
+        'l_office',
+        'l_broker',
+        'bac',
+        'dual_var',
+        'list_type',
+        'comm_type',
+        'wthdrwn_dt',
+        'off_mkt_dt',
+        'exp_dt',
+]
 
-def grab_reports():
-    return LIST_URLS
+def grab_urls(page, URLS):
+    with open(page) as list_html:
+        soup = BeautifulSoup(list_html, 'lxml')
+    
+    table = soup.find("table", class_="datatable")
+    a_tags = table.find_all("a", title=re.compile("View property history"))
+
+    for a in a_tags:
+        a = a['href']
+        a = f'https://www.utahrealestate.com{a}'
+        URLS.append(a)
+    
+    return URLS
 
 def next_page():
-    retun Page_link
+    return page_link
 
 def scrape_report(soup):
     default_value = None
