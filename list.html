@@ -1,0 +1,1789 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>UtahRealEstate.com | WFR Multiple Listing Service | Reports</title>
+        <link rel="icon" type="image/png" href="/site/img/common/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="/site/img/common/favicon-16x16.png" sizes="16x16" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="Content-Script-Type" content="text/javascript" />
+        <meta name="viewport" content="user-scalable=yes" />
+
+                <link rel="stylesheet" type="text/css" media="all" href="/min/?g=layout_css&amp;1551989936" />
+                <link rel="stylesheet" type="text/css" media="print" href="/site/css/print.css?1551989936" />
+        <link rel="stylesheet" type="text/css" href="/site/css/faux-bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="/site/css/urevetica.css?1551989936" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,700' rel='stylesheet' type='text/css' />
+        
+                        <link href="/min/?g=perform_css&amp;1551989936" media="screen" rel="stylesheet" type="text/css" />
+
+        
+        <script type="text/javascript" src="/min/?g=layout_js_top&amp;1551989936"></script>
+        <script type="text/javascript" src="//code.listtrac.com/monitor.ashx?acct=ure_100523&amp;nonjq=1" async></script>
+                
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('[data-toggle="popover"]').popover({
+                    trigger: 'manual',
+                    html: true,
+                    content: '<div class="dropdown-wrapper"><ol><li><span class=\"criteria_col\">State</span> is <span class=\"criteria_value\">Utah</span></li><li><span class=\"criteria_col\">Status</span> is <span class=\"criteria_value\">Active</span></li></ol></div>',
+                    title: 'Search Criteria',
+                    placement: 'bottom',
+                }).click(function () {
+                    $(this).popover('toggle');
+                });
+                
+                $('#results-page-settings').popover({
+                    trigger: 'manual',
+                    html: true,
+                    content: $('#page-settings-content').html(),
+                    title: 'Page Settings',
+                    placement: 'bottom',
+                    container: 'body'
+                }).click(function () {
+                    $(this).popover('toggle');
+                });
+
+                // Initialize bootstrap popover displaying Select All/Deselect All checkbox option
+                $('input#ListingController').popover({
+                    trigger: 'manual',
+                    html: true,
+                    title: 'Select Option',
+                    placement: 'right',
+                    container: 'body'
+                });
+
+                // Close all bootstrap popovers when clicking outside of actual popover
+                $('body').on('click', function (e) {
+                    $('[data-toggle="popover"],[data-original-title]').each(function () {
+                        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                            $(this).popover('hide');
+                        }
+                    });
+                });
+                
+                // Bootstrap tooltip init for Grid/List View icons
+                $('[data-toggle="tooltip"]').tooltip({animation: true});
+                
+                // Bootstrap tooltip init for Criteria and Page Settings icons
+                $('#viewcriteria, #results-page-settings').tooltip({
+                    animation: true,
+                    trigger: 'hover'
+                });
+            });
+        ; section = 'Reports';
+            function actionMenuCallback(action){
+                switch (action) {
+                    case("refine"):
+                        window.location='/search/form/type/1/name/full';
+                        break;
+                    
+                    case("auto-hotsheet"):
+                        location.href = '/search/save.search.form/hot/1';
+                        break;
+                    
+                    case("save-selections"):
+                        
+                        var selected = YAHOO.util.Dom.get('selected-listings').innerHTML;
+                        if (parseInt(selected) == 0) {
+                             MiniNotify.error('Please select at least one entry in order to save selections.', {auto_hide: 5});
+                        } else {
+                            window.location = '/search/save.search.form/selections/1' + (typeof(ref_module) != 'undefined' ? '/ref_mod/' + ref_module : '');
+                        }
+                    
+                        break;
+                    
+                    case("send-selections"):
+                        
+                        var selected = YAHOO.util.Dom.get('selected-listings').innerHTML;
+                        if (parseInt(selected) > 0) {
+                            if (parseInt(selected) > 200){
+                                MiniNotify.warn('You cannot send over 200 listings, please revise your selections.', {auto_hide: 5});
+                            } else {
+                                window.location = '/search/save.search.form/selections/1/send_only/1';
+                            }
+                        } else {
+                            MiniNotify.error('Please select at least one entry in order to send selections.', {auto_hide: 5});
+                        }
+                    
+                        break;
+                    
+                    case("newsearch"):
+                        
+                        jQuery.confirm('open',  'Are you sure you want to start a new search?  This will erase your existing search.',
+                        function(){
+                            location.href = '/search/form/new/1';
+                        });
+                    
+                        break;
+                    
+                }
+            }
+        is_iOS = false;</script>
+       
+                    <script type="text/javascript" src="/min/?g=layout_js&amp;1551989936"></script>
+        
+                                    <script type="text/javascript" src="/min/?g=search_js_top&amp;1551989936"></script>
+                            <script type="text/javascript" src="/min/?g=perform_js&amp;1551989936"></script>
+                            <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+                        <script type="text/javascript">;</script>
+        
+        <style></style>
+    </head>
+    <body class="yui-skin-sam" id="yahoo-com">
+
+    	<a name="top-of-page" id="top-of-page"></a>
+
+        <div class="header_notification">
+                    </div>
+
+        <nav class="navbar navbar-default clear">
+            <div class="container-faux">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                      <img alt="UtahRealEstate.com" src="/site/img/common/logo.svg" width="75" height="44" />
+                    </a>
+                </div>
+
+                <div class="nav-wrap">
+                    <ul class="navbar-nav main-nav" style="margin-right: auto!important;">
+                        <li>
+                            <a href="javascript:void(0)" aria-haspopup="true">Search</a>
+                            <ul class="dropdown-menu dropdown-menu-left searches-wrap" aria-label="submenu">
+                                <li>
+                                    <div class="category-options">
+                                        <div class="category-options-column">
+                                            <b>Residential</b>
+                                            <a href="/search/form/type/1/name/full">Full</a>
+                                            <a href="/search/form/type/1/name/quick">Quick</a>
+                                            <a href="/search/form/type/1/name/list+number">List Number</a>
+                                            <a href="/search/form/type/1/name/address">Address</a>
+                                        </div>
+                                        <div class="category-options-column">
+                                            <b>Multi Unit</b>
+                                            <a href="/search/form/type/2/name/full">Full</a>
+                                            <a href="/search/form/type/2/name/quick">Quick</a>
+                                            <a href="/search/form/type/2/name/list+number">List Number</a>
+                                            <a href="/search/form/type/2/name/address">Address</a>
+                                        </div>
+                                        <div class="category-options-column">
+                                            <b>Land</b>
+                                            <a href="/search/form/type/3/name/full">Full</a>
+                                            <a href="/search/form/type/3/name/quick">Quick</a>
+                                            <a href="/search/form/type/3/name/list+number">List Number</a>
+                                            <a href="/search/form/type/3/name/address">Address</a>
+                                        </div>
+                                        <div class="category-options-column">
+                                            <b>Farm</b>
+                                            <a href="/search/form/type/6/name/full">Full</a>
+                                            <a href="/search/form/type/6/name/quick">Quick</a>
+                                            <a href="/search/form/type/6/name/list+number">List Number</a>
+                                            <a href="/search/form/type/6/name/address">Address</a>
+                                        </div>
+                                        <div class="category-options-column">
+                                            <b>Commercial</b>
+                                            <a href="/search/form/type/5/name/full">Full</a>
+                                            <a href="/search/form/type/5/name/quick">Quick</a>
+                                            <a href="/search/form/type/5/name/list+number">List Number</a>
+                                            <a href="/search/form/type/5/name/address">Address</a>
+                                        </div>
+                                        <div class="category-options-column">
+                                            <b>Residential Lease</b>
+                                            <a href="/search/form/type/7/name/full">Full</a>
+                                            <a href="/search/form/type/7/name/quick">Quick</a>
+                                            <a href="/search/form/type/7/name/list+number">List Number</a>
+                                            <a href="/search/form/type/7/name/address">Address</a>
+                                        </div>
+                                    </div>
+                                    <div class="category-options category-other">
+                                        <div class="category-options-column">
+                                            <b>Cross-Prop</b>
+                                            <a href="/search/form/type/10/name/search%20%28beta%29" title="Cross-Property Search">Search &nbsp;<span style="font-style: italic; font-size: 8pt; vertical-align: super;">beta</span></a>
+                                        </div>
+                                        <div class="category-options-column">
+                                            <b>Roster</b>
+                                            <a href="/roster/search/type/agent" title="Agent">Agent</a>
+                                            <a href="/roster/search/type/office" title="Office">Office</a>
+                                        </div>
+                                        <div class="category-options-column">
+                                            <b>Other</b>
+                                            <a href="/prospects" title="Hotsheets" style="width: 160px;">Hotsheets</a>
+                                            <a href="/prospects" title="Saved Searches" style="width: 160px;">Saved Searches</a>
+                                            <a href="/taxdata" title="Tax Data Search" style="width: 160px;">Tax Data Search</a>
+                                        </div>
+                                    </div>
+                                                                    </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" aria-haspopup="true">Clients</a>
+                            <ul class="dropdown-menu dropdown-menu-left" aria-label="submenu">
+                                <li><a href="/addressbook/">Address Book</a></li>
+                                <li><a href="/prospects">Hotsheets</a></li>
+                                <li><a href="/prospects">Saved Searches</a></li>
+                                <li><a href="/home/wall">Front Porch</a></li>
+                                <li><a href="/showing.list">Showing Lists</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)" aria-haspopup="true">My Listings</a>
+                            <ul class="dropdown-menu dropdown-menu-left" aria-label="submenu">
+                                <li><a href="/lip/index/type/-1/new/1" class="new-listing">Create New Listing</a></li>
+                                <li><a href="/lip/index/type/-1/">Unfinished Listings</a></li>
+                                <li><a href="/lip/index/type/1/">Residential Listings</a></li>
+                                <li><a href="/lip/index/type/7/">Residential Lease Listings</a></li>
+                                <li><a href="/lip/index/type/3/">Land Listings</a></li>
+                                <li><a href="/lip/index/type/5/">Commercial Listings</a></li>
+                                <li><a href="/lip/index/type/2/">Multi-Unit Listings</a></li>
+                                <li><a href="/lip/index/type/6/">Farm Listings</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" aria-haspopup="true">CMA</a>
+                            <ul class="dropdown-menu dropdown-menu-left" aria-label="submenu">
+                                <li><a href="/search/form/type/1/name/cma">Create New</a></li>
+                                <li><a href="/prospects/index/saveTypeFilter/9">Saved CMAs</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" aria-haspopup="true">Forms</a>
+                            <ul class="dropdown-menu dropdown-menu-left" aria-label="submenu">
+                                <li><a href="/forms/">Forms Library</a></li>
+                                <li><a href="/forms/saved/">My Saved Forms</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" aria-haspopup="true">Statistics</a>
+                            <ul class="dropdown-menu dropdown-menu-left" aria-label="submenu">
+                                                                <li><a href="/statistics/main/section/Absorption">Absorption Report</a></li>
+                                <li><a href="/statistics/main/section/HomeSalesGraphs">Home Sales Graphs</a></li>
+                                <li><a href="/statistics/main/section/MarketSummary">Market Summary Report</a></li>
+                                <li><a href="/statistics/main/section/QuarterlyComparison">Quarterly Comparison</a></li>
+                                <li><a href="/statistics/main/section/SalesPerMonth">Sales Per Month Report</a></li>
+                                <li><a href="/statistics/DailySnapShot.report/section/DailySnapShot">Daily Snapshot Report</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" aria-haspopup="true">Tools</a>
+                            <ul class="dropdown-menu dropdown-menu-left" aria-label="submenu">
+                                <li><a href="/tools/amortization.calc">Mortgage Calculator</a></li>
+                                <li><a href="/report/display/report/address/type/1/none/1">Address Routing</a></li>
+                                                                    <li><a href="/wfrmls/feeds">Data Licensing</a></li>
+                                                                                                </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav secondary-nav" style="flex-direction: row!important;">
+                        <li id="masthead-new-tab-link">
+                            <a href="#" class="new-tab" onClick="window.open(window.location.href, '_blank'); return false;">
+                                <i class="icon icon-tab"></i>
+                                <span class="nav-item-title">New Tab</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="masthead-help-link" href="javascript:void(0)" class="help-center" aria-haspopup="true"><i class="icon icon-help-circled"></i> <span class="nav-item-title">Help</span></a>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-label="submenu">
+                                <li>
+                                    <a href="/index/contact.us" id="email-support-btn" title="Contact Us">Contact Us</a>
+                                </li>
+                                <li><a href="//help.utahrealestate.com" target="_blank">Support Center</a></li>
+                                <li><a href="/page/do/license-agreements/">MLS Rules &amp; Policies</a></li>
+                                <li><a href="/classes/">Classes</a></li>
+                                <li><a href="/index/boards">Boards &amp; Associations</a></li>
+                            </ul>
+                        </li>
+                        <li id="masthead-news-link">
+                             <span class="mls-new-notify">1</span>                            <a class="news-announcement" href="/news/">
+                                <i class="icon icon-bell-o"></i>
+                                <span class="nav-item-title">News</span>
+                            </a>
+                        </li>
+                        <li id="masthead-account-settings-link">
+                            <a href="javascript:void(0)" aria-haspopup="true">
+                                <img class="img-circle" src="/images/preferences/no_profile_image.png" border="0" width="32" title="Spencer Fitzgerald" alt="Spencer Fitzgerald" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-label="submenu">
+                                <li class="nav-item-content-title">Spencer Fitzgerald</li>
+                                                                                                <li>
+                                                                    </li>
+                                <li>
+                                                                                                                                        <a href="/wfrmls/billing/">Billing</a>
+                                                                                                                            </li>
+                                <li><a href="/preferences/">Account Settings</a></li>
+                                <li><a href="/preferences/profile/">Edit Profile</a></li>
+                                <li><a href="/preferences/profile/change.password.form/">Change Password</a></li>
+
+                                <li><a id="log-out-btn" href="javascript:Authenticate.logout();" title="Log out of the system">Sign Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-faux-wrap">
+            <div class="container-faux">
+                <div class="menu-container">
+                    <!-- Menu -->
+                    <ul class="menu">
+                        <li class="menu-search" searchtype="address">
+                            <a href="javascript:;" aria-hidden="true">
+                                Search Address
+                            </a>
+                        </li>
+                        <li class="menu-search" searchtype="agentOffice">
+                            <a href="javascript:;" aria-hidden="true">
+                                Search Agent or Office
+                            </a>
+                        </li>
+                        <li class="menu-search" searchtype="listno">
+                            <a href="javascript:;" aria-hidden="true">
+                                Search MLS#
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Speedbar Search Fields -->
+                    <div class="menu-search-container">
+                        <div class="menu-search-input">
+                            <form name="speedbar_widget_form">
+                                <input class="menu-search-input form-control" id="menu-search-input-address" name="widget_listing_search" type="text" aria-label="Search Address" placeholder="Search Address" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="display:none" />
+                                <input class="menu-search-input form-control" id="menu-search-input-agentOffice" name="widget_agent_office" type="text" aria-label="Search Agent or Office" placeholder="Search Agent or Office" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="display:none" />
+                                <input class="menu-search-input form-control" id="menu-search-input-listno" name="widget_listno_search" type="text" aria-label="Search MLS#" placeholder="Search MLS#" autocorrect="off" autocapitalize="off" autocomplete="off" style="display:none" />
+                                <a class="search-button" href="javascript:;" aria-hidden="true"></a>
+                            </form>
+                        </div>
+                        <a class="menu-search-close" href="javascript:;">
+                            <i class="icon icon-close" aria-hidden="true"></i>
+                        </a>
+                        <span class="ajax_response" style="visibility: hidden; text-align: center;">No Results Found</span>
+                    </div>
+                </div>
+                <br clear="all" />
+            </div>
+        </div>
+
+        <!-- Speedbar display window modal overlay -->
+        <div class="fade-screen"></div>
+        
+
+        <div id="wrap-wrapper">
+            <div id="wrap">
+                                    <div id="toolbar-wrap" class="no-print" style="width: 100%; background-color: #f5f5f5">
+                        <div class="gutter">
+                                                                                        <div id="action-bar-wrap" class="no-print">
+                                    <p id="title_bar" class="no-print" title="Searches / Residential / Results">Searches / Residential / Results</p>
+                                    <div id="action_menu" >
+                                                                                                                                
+                <button type="button" class="btn btn-default" id="refine-button" value="Refine Search" name="refine"  onclick="actionMenuCallback('refine');"><i class="icon icon-refine-button"></i> Refine Search</button>
+            
+                <button type="button" class="btn btn-default" id="auto-hotsheet-button" value="Create Hotsheet" name="auto-hotsheet"  onclick="actionMenuCallback('auto-hotsheet');"><i class="icon icon-auto-hotsheet-button"></i> Create Hotsheet</button>
+            
+                <button type="button" class="btn btn-default" id="save-selections-button" value="Save Selections" name="save-selections"  onclick="actionMenuCallback('save-selections');"><i class="icon icon-save-selections-button"></i> Save Selections</button>
+            
+                <button type="button" class="btn btn-default" id="send-selections-button" value="Send Selections" name="send-selections"  onclick="actionMenuCallback('send-selections');"><i class="icon icon-send-selections-button"></i> Send Selections</button>
+            
+                <button type="button" class="btn btn-default" id="newsearch-button" value="New Search" name="newsearch"  onclick="actionMenuCallback('newsearch');"><i class="icon icon-newsearch-button"></i> New Search</button>
+                                                                                        </div>
+
+                                        <ul class="pagination" id="pager">
+                <li class="page-number"><span id="page-selector"><label for="page-selector" style="display:none">page-selector</label><select id="page-selector" name="page-selector" onchange="location.href = addParamToURL(location.href, 'page', this.value)" class="form-control">
+<option value="1" selected="selected">Page 1 of 165</option>
+<option value="2">Page 2</option>
+<option value="3">Page 3</option>
+<option value="4">Page 4</option>
+<option value="5">Page 5</option>
+<option value="6">Page 6</option>
+<option value="7">Page 7</option>
+<option value="8">Page 8</option>
+<option value="9">Page 9</option>
+<option value="10">Page 10</option>
+<option value="11">Page 11</option>
+<option value="12">Page 12</option>
+<option value="13">Page 13</option>
+<option value="14">Page 14</option>
+<option value="15">Page 15</option>
+<option value="16">Page 16</option>
+<option value="17">Page 17</option>
+<option value="18">Page 18</option>
+<option value="19">Page 19</option>
+<option value="20">Page 20</option>
+<option value="21">Page 21</option>
+<option value="22">Page 22</option>
+<option value="23">Page 23</option>
+<option value="24">Page 24</option>
+<option value="25">Page 25</option>
+<option value="26">Page 26</option>
+<option value="27">Page 27</option>
+<option value="28">Page 28</option>
+<option value="29">Page 29</option>
+<option value="30">Page 30</option>
+<option value="31">Page 31</option>
+<option value="32">Page 32</option>
+<option value="33">Page 33</option>
+<option value="34">Page 34</option>
+<option value="35">Page 35</option>
+<option value="36">Page 36</option>
+<option value="37">Page 37</option>
+<option value="38">Page 38</option>
+<option value="39">Page 39</option>
+<option value="40">Page 40</option>
+<option value="41">Page 41</option>
+<option value="42">Page 42</option>
+<option value="43">Page 43</option>
+<option value="44">Page 44</option>
+<option value="45">Page 45</option>
+<option value="46">Page 46</option>
+<option value="47">Page 47</option>
+<option value="48">Page 48</option>
+<option value="49">Page 49</option>
+<option value="50">Page 50</option>
+<option value="51">Page 51</option>
+<option value="52">Page 52</option>
+<option value="53">Page 53</option>
+<option value="54">Page 54</option>
+<option value="55">Page 55</option>
+<option value="56">Page 56</option>
+<option value="57">Page 57</option>
+<option value="58">Page 58</option>
+<option value="59">Page 59</option>
+<option value="60">Page 60</option>
+<option value="61">Page 61</option>
+<option value="62">Page 62</option>
+<option value="63">Page 63</option>
+<option value="64">Page 64</option>
+<option value="65">Page 65</option>
+<option value="66">Page 66</option>
+<option value="67">Page 67</option>
+<option value="68">Page 68</option>
+<option value="69">Page 69</option>
+<option value="70">Page 70</option>
+<option value="71">Page 71</option>
+<option value="72">Page 72</option>
+<option value="73">Page 73</option>
+<option value="74">Page 74</option>
+<option value="75">Page 75</option>
+<option value="76">Page 76</option>
+<option value="77">Page 77</option>
+<option value="78">Page 78</option>
+<option value="79">Page 79</option>
+<option value="80">Page 80</option>
+<option value="81">Page 81</option>
+<option value="82">Page 82</option>
+<option value="83">Page 83</option>
+<option value="84">Page 84</option>
+<option value="85">Page 85</option>
+<option value="86">Page 86</option>
+<option value="87">Page 87</option>
+<option value="88">Page 88</option>
+<option value="89">Page 89</option>
+<option value="90">Page 90</option>
+<option value="91">Page 91</option>
+<option value="92">Page 92</option>
+<option value="93">Page 93</option>
+<option value="94">Page 94</option>
+<option value="95">Page 95</option>
+<option value="96">Page 96</option>
+<option value="97">Page 97</option>
+<option value="98">Page 98</option>
+<option value="99">Page 99</option>
+<option value="100">Page 100</option>
+<option value="101">Page 101</option>
+<option value="102">Page 102</option>
+<option value="103">Page 103</option>
+<option value="104">Page 104</option>
+<option value="105">Page 105</option>
+<option value="106">Page 106</option>
+<option value="107">Page 107</option>
+<option value="108">Page 108</option>
+<option value="109">Page 109</option>
+<option value="110">Page 110</option>
+<option value="111">Page 111</option>
+<option value="112">Page 112</option>
+<option value="113">Page 113</option>
+<option value="114">Page 114</option>
+<option value="115">Page 115</option>
+<option value="116">Page 116</option>
+<option value="117">Page 117</option>
+<option value="118">Page 118</option>
+<option value="119">Page 119</option>
+<option value="120">Page 120</option>
+<option value="121">Page 121</option>
+<option value="122">Page 122</option>
+<option value="123">Page 123</option>
+<option value="124">Page 124</option>
+<option value="125">Page 125</option>
+<option value="126">Page 126</option>
+<option value="127">Page 127</option>
+<option value="128">Page 128</option>
+<option value="129">Page 129</option>
+<option value="130">Page 130</option>
+<option value="131">Page 131</option>
+<option value="132">Page 132</option>
+<option value="133">Page 133</option>
+<option value="134">Page 134</option>
+<option value="135">Page 135</option>
+<option value="136">Page 136</option>
+<option value="137">Page 137</option>
+<option value="138">Page 138</option>
+<option value="139">Page 139</option>
+<option value="140">Page 140</option>
+<option value="141">Page 141</option>
+<option value="142">Page 142</option>
+<option value="143">Page 143</option>
+<option value="144">Page 144</option>
+<option value="145">Page 145</option>
+<option value="146">Page 146</option>
+<option value="147">Page 147</option>
+<option value="148">Page 148</option>
+<option value="149">Page 149</option>
+<option value="150">Page 150</option>
+<option value="151">Page 151</option>
+<option value="152">Page 152</option>
+<option value="153">Page 153</option>
+<option value="154">Page 154</option>
+<option value="155">Page 155</option>
+<option value="156">Page 156</option>
+<option value="157">Page 157</option>
+<option value="158">Page 158</option>
+<option value="159">Page 159</option>
+<option value="160">Page 160</option>
+<option value="161">Page 161</option>
+<option value="162">Page 162</option>
+<option value="163">Page 163</option>
+<option value="164">Page 164</option>
+<option value="165">Page 165</option>
+</select></span></li>
+                    <li><a href="javascript:;" onclick="location.href = addParamToURL(location.href, 'page', '2');">Next &rarr;</a></li>
+            </ul>
+                                    </div>
+                                                                                </div>
+                    </div>
+                    <img src="/site/img/common/1-pixel.gif" id="page-header-spacer" class="no-print" width="1px" height="89px" alt="" border="0" />
+                                            <div id="action-wrap">
+                            <div class="gutter">
+                                <div class="action-pane no-print" id="action_pane">
+                                                                            <div class="clear no-print" style="width: 100%; position: relative;">
+    <div class="result-control-wrap">
+        <ul class="result-control-main">
+            <li class="result-head">Selected Listings: <span id="selected-listings">0</span> of <span id="total-listings">8,246</span></li>
+            <li><label for="report-selector" style="display:none">report-selector</label><select id="report-selector" name="report-selector" onchange="chooseReport(this)" class="form-control" disabled="disabled">
+<option value="/search/perform">--&nbsp; &nbsp; &nbsp; VIEW REPORTS &nbsp; &nbsp; &nbsp;--</option>
+<optgroup id="standard-reports" label="Standard Reports"><option id="full" value="full">Agent Full Report</option>
+<option id="address" value="address">Address Routing Report</option>
+<option id="brief" value="brief">Brief Report</option>
+<option id="client" value="client">Client Report</option>
+<option id="clientfull" value="clientfull">Client Full Report</option>
+<option id="clienthistory" value="clienthistory">Client History Report</option>
+<option id="cloudcma" value="cloudcma">Cloud CMA</option>
+<option id="cma" value="cma">CMA Report</option>
+<option id="column" value="column">Column Report</option>
+<option id="export" value="export">Export Report</option>
+<option id="photofull" value="photofull">Large Photo Report</option>
+<option id="map" value="map">Map Report</option>
+<option id="medium" value="medium">Medium Report</option>
+<option id="openhouse" value="openhouse">Open House Report</option>
+<option id="photo" value="photo">Photo Report</option>
+<option id="par" value="par">Property Activity Report</option>
+</optgroup></select></li>
+        </ul>
+        <ul class="result-control-secondary">
+            <li><button type="button" id="list-view-button" title="List View" onclick="viewButtonClick('list')" data-toggle="tooltip" data-placement="top" class="view-selected"><i class="icon icon-outline-list-view"></i></button></li>
+            <li><button type="button" id="other-view-button" title="Grid View" onclick="viewButtonClick('thumbnail')" data-toggle="tooltip" data-placement="top"><i class="icon icon-outline-gallery-view"></i></button></li>
+            <li><a href="#" id="viewcriteria" data-toggle="popover" title="View Criteria" data-placement="top" onclick="return false;"><i class="icon icon-outline-info"></i></a></li>
+            <li>
+                <a href="javascript:void(0)" id="results-page-settings" title="Page Settings"><i class="icon icon-outline-cog"></i></a>
+                <div class="dropdown-content" id="page-settings-content">
+                    <label for="limit-selector" style="display:none">limit-selector</label><select id="limit-selector" name="limit-selector" onchange="location.href = addParamToURL(addParamToURL(location.href, 'limit', this.value), 'page', 1)" class="form-control">
+<option value="5">5 listings</option>
+<option value="10">10 listings</option>
+<option value="15">15 listings</option>
+<option value="20">20 listings</option>
+<option value="25">25 listings</option>
+<option value="50" selected="selected">50 listings per page</option>
+<option value="75">75 listings</option>
+<option value="100">100 listings</option>
+</select>                    <div style="display: none"><span id="current-limit">50</span></div>
+                    <br />
+                    <br />
+                    <a id="settings-view-button" onclick="showResultsColumnPicker('1');">Change Column Display</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>                                                                    </div>
+                                <div class="action-content" id="action_content">
+                                    <div id="df">
+                                        <div id="lead-body" style="display: none">
+    <h3>Lead Warning Statement</h3>
+    <p style="font-size: .8em; line-height: 1.3em; max-width: 300px; font-family: 'Open Sans';">Every purchaser of any interest in residential real property on which a residential dwelling was built prior to 1978 is notified that such property may present exposure to lead from lead-based paint that may place young children at risk of developing lead poisoning. Lead poisoning in young children may produce permanent neurological damage, including learning disabilities, reduced intelligence quotient, behavioral problems, and impaired memory. Lead poisoning also poses a particular risk to pregnant women. The seller of any interest in residential real property is required to provide the buyer with any information on lead-based paint hazards from risk assessments or inspections in the seller's possession and notify the buyer of any known lead-based paint hazards. A risk assessment or inspection for possible lead-based paint hazards is recommended prior to purchase.</p>
+</div>
+
+<div id="search-results" class="info">
+            <div id="search-results-table" class="table-responsive visible-scroll">
+            <table class="datatable no-wrap">
+                <thead>
+                <tr class="head">
+    <th style="text-align: center;"><input type="checkbox" name="ListingController" id="ListingController" class="selListingChk" onclick="toggleListingController();" /></th>
+        <th class="" id="listno" onclick="return headerClick(this.id + ' ASC');" title="Sort by MLS#">MLS#</th>
+                        <th class="" id="image" onclick="return headerClick(this.id + ' ASC');" title="Sort by Photo">
+                Photo                            </th>
+                                <th class="" id="status" onclick="return headerClick(this.id + ' ASC');" title="Sort by Stat">
+                Stat                            </th>
+                                <th class=" selectedh" id="listprice" onclick="return headerClick(this.id + ' DESC');" title="Sort by List $">
+                List $                <i id="caret">&#9650;</i>            </th>
+                                <th class="" id="tot_sqf" onclick="return headerClick(this.id + ' ASC');" title="Sort by SqFt">
+                SqFt                            </th>
+                                <th class="" id="tot_bed" onclick="return headerClick(this.id + ' ASC');" title="Sort by Bed">
+                Bed                            </th>
+                                <th class="" id="tot_bath" onclick="return headerClick(this.id + ' ASC');" title="Sort by Bath">
+                Bath                            </th>
+                                <th class="" id="dom" onclick="return headerClick(this.id + ' ASC');" title="Sort by DOM">
+                DOM                            </th>
+                                <th class="" id="housenum" onclick="return headerClick(this.id + ' ASC');" title="Sort by Address">
+                Address                            </th>
+                                <th class="" id="city" onclick="return headerClick(this.id + ' ASC');" title="Sort by City">
+                City                            </th>
+                                <th class="" id="dt_sold" onclick="return headerClick(this.id + ' ASC');" title="Sort by Sold DT">
+                Sold DT                            </th>
+                <th>Links</th>
+</tr>                </thead>
+                <tbody>
+                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1505790" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1505790/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1505790', '/report/display/report/full/type/1/in_pop/1/listno/1505790/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1505790_pop'); }});return false;;this.style.color='#000'">1505790</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1505790_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1505790_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">2,249</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">397</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1505790 &amp;raquo; 201  HEBER AVE #305/20 &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646638/lng/-111.496878/list/1505790/add/201++HEBER+AVE+%23305%2F20/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #305/20</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC3051AM/report_listno/1505790" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1571868" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1571868/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1571868', '/report/display/report/full/type/1/in_pop/1/listno/1571868/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1571868_pop'); }});return false;;this.style.color='#000'">1571868</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1571868_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1571868_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">2,161</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">96</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1571868 &amp;raquo; 201  HEBER AVE #209D &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1571868/add/201++HEBER+AVE+%23209D/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #209D</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC209D1AM/report_listno/1571868" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1505782" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1505782/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1505782', '/report/display/report/full/type/1/in_pop/1/listno/1505782/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1505782_pop'); }});return false;;this.style.color='#000'">1505782</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1505782_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1505782_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">1,260</td>
+                                <td  align="center">2</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">397</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1505782 &amp;raquo; 201  HEBER AVE #206-A &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646403/lng/-111.496757/list/1505782/add/201++HEBER+AVE+%23206-A/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #206-A</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC206A1AM/report_listno/1505782" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1571864" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1571864/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1571864', '/report/display/report/full/type/1/in_pop/1/listno/1571864/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1571864_pop'); }});return false;;this.style.color='#000'">1571864</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1571864_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1571864_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">2,161</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">96</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1571864 &amp;raquo; 201  HEBER AVE #209C &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1571864/add/201++HEBER+AVE+%23209C/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #209C</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC209C1AM/report_listno/1571864" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1505776" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1505776/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1505776', '/report/display/report/full/type/1/in_pop/1/listno/1505776/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1505776_pop'); }});return false;;this.style.color='#000'">1505776</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1505776_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1505776_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">2,011</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">397</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1505776 &amp;raquo; 201  HEBER AVE #301/20 &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646638/lng/-111.496878/list/1505776/add/201++HEBER+AVE+%23301%2F20/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #301/20</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC2011AM/report_listno/1505776" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1505772" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1505772/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1505772', '/report/display/report/full/type/1/in_pop/1/listno/1505772/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1505772_pop'); }});return false;;this.style.color='#000'">1505772</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1505772_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1505772_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">1,981</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">397</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1505772 &amp;raquo; 201  HEBER AVE #401/50 &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646403/lng/-111.496757/list/1505772/add/201++HEBER+AVE+%23401%2F50/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #401/50</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC5011AM/report_listno/1505772" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1505718" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1505718/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1505718', '/report/display/report/full/type/1/in_pop/1/listno/1505718/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1505718_pop'); }});return false;;this.style.color='#000'">1505718</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1505718_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1505718_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">2,195</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">397</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1505718 &amp;raquo; 201  HEBER AVE #403/50 &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646638/lng/-111.496878/list/1505718/add/201++HEBER+AVE+%23403%2F50/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #403/50</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC4031AM/report_listno/1505718" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1571796" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1571796/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1571796', '/report/display/report/full/type/1/in_pop/1/listno/1571796/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1571796_pop'); }});return false;;this.style.color='#000'">1571796</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1571796_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1571796_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">2,161</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">96</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1571796 &amp;raquo; 201  HEBER AVE #209A &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1571796/add/201++HEBER+AVE+%23209A/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #209A</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC2091AM/report_listno/1571796" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1571789" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1571789/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1571789', '/report/display/report/full/type/1/in_pop/1/listno/1571789/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1571789_pop'); }});return false;;this.style.color='#000'">1571789</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1571789_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1571789_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">2,471</td>
+                                <td  align="center">3</td>
+                                <td  align="right">4.00</td>
+                                <td  align="right">96</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1571789 &amp;raquo; 201  HEBER AVE #204B &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1571789/add/201++HEBER+AVE+%23204B/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #204B</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC204B1AM/report_listno/1571789" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1571786" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1571786/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1571786', '/report/display/report/full/type/1/in_pop/1/listno/1571786/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1571786_pop'); }});return false;;this.style.color='#000'">1571786</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1571786_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1571786_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">1,258</td>
+                                <td  align="center">2</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">96</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1571786 &amp;raquo; 201  HEBER AVE #306E &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1571786/add/201++HEBER+AVE+%23306E/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #306E</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC3061AM/report_listno/1571786" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1571757" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1571757/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1571757', '/report/display/report/full/type/1/in_pop/1/listno/1571757/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1571757_pop'); }});return false;;this.style.color='#000'">1571757</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1571757_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1571757_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">2,037</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">96</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1571757 &amp;raquo; 201  HEBER AVE #202D &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1571757/add/201++HEBER+AVE+%23202D/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #202D</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC2021AM/report_listno/1571757" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1571858" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1571858/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1571858', '/report/display/report/full/type/1/in_pop/1/listno/1571858/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1571858_pop'); }});return false;;this.style.color='#000'">1571858</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1571858_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1571858_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(2000)">$2,000</a></td>
+                                <td  align="right">2,471</td>
+                                <td  align="center">3</td>
+                                <td  align="right">4.00</td>
+                                <td  align="right">96</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1571858 &amp;raquo; 201  HEBER AVE #204C &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1571858/add/201++HEBER+AVE+%23204C/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #204C</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC204C1AM/report_listno/1571858" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1570148" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1570148/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1570148', '/report/display/report/full/type/1/in_pop/1/listno/1570148/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1570148_pop'); }});return false;;this.style.color='#000'">1570148</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1570148_1673331e861e8820f896c440e5511d31_274807.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1570148_1673331e861e8820f896c440e5511d31_274807.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(5000)">$5,000</a></td>
+                                <td  align="right">1,603</td>
+                                <td  align="center">2</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">106</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1570148 &amp;raquo; 3000  CANYONS RESORT DR &amp;raquo; Park City, UT 84098', '/mapping/gmapf/show_address/1/lat/40.684598/lng/-111.554842/list/1570148/add/3000++CANYONS+RESORT+DR/city/Park+City/state/UT/zip/84098', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">3000  Canyons Resort Dr</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/WGC12AN/report_listno/1570148" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1579433" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1579433/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1579433', '/report/display/report/full/type/1/in_pop/1/listno/1579433/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1579433_pop'); }});return false;;this.style.color='#000'">1579433</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1579433_e334624cce3d570795aa8fd950e16208_8869.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1579433_e334624cce3d570795aa8fd950e16208_8869.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(8000)">$8,000</a></td>
+                                <td  align="right">840</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">43</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1579433 &amp;raquo; 226 N 100 W &amp;raquo; Manila, UT 84046', '/mapping/gmapf/show_address/1/lat/40.992549/lng/-109.724667/list/1579433/add/226+N+100+W/city/Manila/state/UT/zip/84046', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">226 N 100 W</a></td>
+                                <td  align="left">Manila</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/daggett/parcel_id/01010A0006/report_listno/1579433" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1587159" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1587159/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1587159', '/report/display/report/full/type/1/in_pop/1/listno/1587159/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1587159_pop'); }});return false;;this.style.color='#000'">1587159</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1587159_53731110c34c2fad3a16b7486cf9c0ef_1314760.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1587159_53731110c34c2fad3a16b7486cf9c0ef_1314760.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(10500)">$10,500</a></td>
+                                <td  align="right">840</td>
+                                <td  align="center">3</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">2</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1587159 &amp;raquo; 132 W WHITMORE LN #7 &amp;raquo; East Carbon, UT 84520', '/mapping/gmapf/show_address/1/lat/39.545034/lng/-110.428049/list/1587159/add/132+W+WHITMORE+LN+%237/city/East+Carbon/state/UT/zip/84520', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">132 W Whitmore Ln  #7</a></td>
+                                <td  align="left">East Carbon</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/carbon/parcel_id/1C02760000/report_listno/1587159" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1421652" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1421652/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1421652', '/report/display/report/full/type/1/in_pop/1/listno/1421652/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1421652_pop'); }});return false;;this.style.color='#000'">1421652</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1421652_05be42826e369e87d38719b4478ac459_285208.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1421652_05be42826e369e87d38719b4478ac459_285208.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(12000)">$12,000</a></td>
+                                <td  align="right">1,100</td>
+                                <td  align="center">2</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">834</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1421652 &amp;raquo; 3000  CANYONS RESORT, BLDG 10  #806 &amp;raquo; Park City, UT 84098', '/mapping/gmapf/show_address/1/lat/40.684583/lng/-111.554641/list/1421652/add/3000++CANYONS+RESORT%2C+BLDG+10++%23806/city/Park+City/state/UT/zip/84098', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">3000  Canyons Resort, Bldg 10   #806</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/WGC12AM/report_listno/1421652" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1521075" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1521075/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1521075', '/report/display/report/full/type/1/in_pop/1/listno/1521075/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1521075_pop'); }});return false;;this.style.color='#000'">1521075</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1521075_bce7ef4e2b6db8289d0a909b75bacc86_75712.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1521075_bce7ef4e2b6db8289d0a909b75bacc86_75712.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(15000)">$15,000</a></td>
+                                <td  align="right">1,100</td>
+                                <td  align="center">2</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">327</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1521075 &amp;raquo; 3000  CANYONS RESORT DR #3-406 &amp;raquo; Park City, UT 84098', '/mapping/gmapf/show_address/1/lat/40.684868/lng/-111.554316/list/1521075/add/3000++CANYONS+RESORT+DR+%233-406/city/Park+City/state/UT/zip/84098', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">3000  Canyons Resort Dr  #3-406</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/WGC12A/report_listno/1521075" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1553384" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1553384/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1553384', '/report/display/report/full/type/1/in_pop/1/listno/1553384/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1553384_pop'); }});return false;;this.style.color='#000'">1553384</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1553384_a480dd5843b01d725ca1bc7562c3e1ce_5747158.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1553384_a480dd5843b01d725ca1bc7562c3e1ce_5747158.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(15000)">$15,000</a></td>
+                                <td  align="right">576</td>
+                                <td  align="center">0</td>
+                                <td  align="right">0.00</td>
+                                <td  align="right">191</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="balloon.showTooltip(event, '<b>Directions:</b><br />When in Altamont turn onto 16000 West go 1.9 miles turn left onto County Rd 123 follow the road for 0.4 miles it is behind the 3rd home on the left.', 1)">See Directions</a></td>
+                                <td  align="left">Altonah</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1587184" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1587184/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1587184', '/report/display/report/full/type/1/in_pop/1/listno/1587184/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1587184_pop'); }});return false;;this.style.color='#000'">1587184</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1587184_f14382e0de3197883a7465392143d6a4_1516796.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1587184_f14382e0de3197883a7465392143d6a4_1516796.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(15500)">$15,500</a></td>
+                                <td  align="right">969</td>
+                                <td  align="center">3</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">2</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1587184 &amp;raquo; 117  7TH-W  &amp;raquo; East Carbon, UT 84520', '/mapping/gmapf/show_address/1/lat/39.543533/lng/-110.427768/list/1587184/add/117++7TH-W+/city/East+Carbon/state/UT/zip/84520', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">117  7th-w </a></td>
+                                <td  align="left">East Carbon</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/carbon/parcel_id/1C01010000/report_listno/1587184" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1553586" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1553586/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1553586', '/report/display/report/full/type/1/in_pop/1/listno/1553586/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1553586_pop'); }});return false;;this.style.color='#000'">1553586</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1553586_7691a1873eabf2915e79128548403a2c_4199226.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1553586_7691a1873eabf2915e79128548403a2c_4199226.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(19000)">$19,000</a></td>
+                                <td  align="right">1,680</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">163</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1553586 &amp;raquo; 2925 S HIGHWAY 89  &amp;raquo; Perry, UT 84302', '/mapping/gmapf/show_address/1/lat/41.456379/lng/-112.037806/list/1553586/add/2925+S+HIGHWAY+89+/city/Perry/state/UT/zip/84302', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">2925 S Highway 89 </a></td>
+                                <td  align="left">Perry</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/box+elder/parcel_id/020290036/report_listno/1553586" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1582939" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1582939/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1582939', '/report/display/report/full/type/1/in_pop/1/listno/1582939/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1582939_pop'); }});return false;;this.style.color='#000'">1582939</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1582939_73be8741fd42049035770761963d65e7_9666.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1582939_73be8741fd42049035770761963d65e7_9666.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(20000)">$20,000</a></td>
+                                <td  align="right">923</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">22</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1582939 &amp;raquo; 781 N VALLEY VIEW  DR #10 &amp;raquo; St. George, UT 84770', '/mapping/gmapf/show_address/1/lat/37.121857/lng/-113.605777/list/1582939/add/781+N+VALLEY+VIEW++DR+%2310/city/St.+George/state/UT/zip/84770', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">781 N Valley View  Dr  #10</a></td>
+                                <td  align="left">St. George</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/washington/parcel_id/SGHSFA10/report_listno/1582939" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1562660" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1562660/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1562660', '/report/display/report/full/type/1/in_pop/1/listno/1562660/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1562660_pop'); }});return false;;this.style.color='#000'">1562660</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1562660_2429d75843365263baa5cd68de3c97d4_705547_crop.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1562660_2429d75843365263baa5cd68de3c97d4_705547_crop.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(21000)">$21,000</a></td>
+                                <td  align="right">1,000</td>
+                                <td  align="center">2</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">137</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1562660 &amp;raquo; 342  SIR KAY WAY &amp;raquo; North Salt Lake, UT 84054', '/mapping/gmapf/show_address/1/lat/40.853584/lng/-111.903529/list/1562660/add/342++SIR+KAY+WAY/city/North+Salt+Lake/state/UT/zip/84054', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">342  Sir Kay Way</a></td>
+                                <td  align="left">North Salt Lake</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1581776" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1581776/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1581776', '/report/display/report/full/type/1/in_pop/1/listno/1581776/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1581776_pop'); }});return false;;this.style.color='#000'">1581776</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1581776_21fcabdd38087b6c6ae03a0571df377e_878860.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1581776_21fcabdd38087b6c6ae03a0571df377e_878860.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(21990)">$21,990</a></td>
+                                <td  align="right">882</td>
+                                <td  align="center">2</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">29</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1581776 &amp;raquo; 2683 S EDUCATION CIR #52 &amp;raquo; West Valley City, UT 84128', '/mapping/gmapf/show_address/1/lat/40.711468/lng/-112.058844/list/1581776/add/2683+S+EDUCATION+CIR+%2352/city/West+Valley+City/state/UT/zip/84128', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">2683 S Education Cir  #52</a></td>
+                                <td  align="left">West Valley City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/salt+lake/parcel_id/1422358012/report_listno/1581776" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1575111" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1575111/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1575111', '/report/display/report/full/type/1/in_pop/1/listno/1575111/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1575111_pop'); }});return false;;this.style.color='#000'">1575111</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1575111_457831abebcecefcfdbfd5d5ade71128_703027.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1575111_457831abebcecefcfdbfd5d5ade71128_703027.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(22900)">$22,900</a></td>
+                                <td  align="right">784</td>
+                                <td  align="center">2</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">68</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1575111 &amp;raquo; 101  KINGS CT &amp;raquo; Logan, UT 84321', '/mapping/gmapf/show_address/1/lat/41.746461/lng/-111.847344/list/1575111/add/101++KINGS+CT/city/Logan/state/UT/zip/84321', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">101  Kings Ct</a></td>
+                                <td  align="left">Logan</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                <a class="view-property-tour" href="javascript:;" onclick="jQuery.browserbox('show', 'Property Tour for MLS #1575111', '/report/display/report/photo/listno/1575111/type/1/in_pop/1/pub/0', {menu : {pdf : bbOnPdf, email : bbOnEmail},});" listhub_id="view-virtual-tour" title="Property Tour"></a>    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1576204" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1576204/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1576204', '/report/display/report/full/type/1/in_pop/1/listno/1576204/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1576204_pop'); }});return false;;this.style.color='#000'">1576204</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1576204_996a5686829c44e2b07c6ce8c5d23d75_5835993.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1576204_996a5686829c44e2b07c6ce8c5d23d75_5835993.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(23999)">$23,999</a></td>
+                                <td  align="right">950</td>
+                                <td  align="center">2</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">62</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1576204 &amp;raquo; 653 E MAIN ST #11 &amp;raquo; Grantsville, UT 84029', '/mapping/gmapf/show_address/1/lat/40.601810/lng/-112.434888/list/1576204/add/653+E+MAIN+ST+%2311/city/Grantsville/state/UT/zip/84029', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">653 E Main St  #11</a></td>
+                                <td  align="left">Grantsville</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                <a class="view-property-tour" href="javascript:;" onclick="jQuery.browserbox('show', 'Property Tour for MLS #1576204', '/report/display/report/photo/listno/1576204/type/1/in_pop/1/pub/0', {menu : {pdf : bbOnPdf, email : bbOnEmail},});" listhub_id="view-virtual-tour" title="Property Tour"></a>    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1586494" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1586494/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1586494', '/report/display/report/full/type/1/in_pop/1/listno/1586494/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1586494_pop'); }});return false;;this.style.color='#000'">1586494</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1586494_965545a5b7883fe19d26724ddd73af73_3870664.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1586494_965545a5b7883fe19d26724ddd73af73_3870664.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(25000)">$25,000</a></td>
+                                <td  align="right">576</td>
+                                <td  align="center">1</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">6</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="balloon.showTooltip(event, '<b>Directions:</b><br />Uintah View Lot 7-24A on approximately 4000 South 20810 West ', 1)">See Directions</a></td>
+                                <td  align="left">Duchesne</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/duchesne/parcel_id/0000070024A/report_listno/1586494" title="Tax Data"></a>        <a class="view-property-tour" href="javascript:;" onclick="jQuery.browserbox('show', 'Property Tour for MLS #1586494', '/report/display/report/photo/listno/1586494/type/1/in_pop/1/pub/0', {menu : {pdf : bbOnPdf, email : bbOnEmail},});" listhub_id="view-virtual-tour" title="Property Tour"></a>    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1581857" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1581857/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1581857', '/report/display/report/full/type/1/in_pop/1/listno/1581857/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1581857_pop'); }});return false;;this.style.color='#000'">1581857</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1581857_bcac3549d6c569ad4f561f5f39a033ac_1586363.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1581857_bcac3549d6c569ad4f561f5f39a033ac_1586363.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(25000)">$25,000</a></td>
+                                <td  align="right">1,008</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">28</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1581857 &amp;raquo; 3960 S MIDLAND DR #A-12 &amp;raquo; Roy, UT 84067', '/mapping/gmapf/show_address/1/lat/41.176094/lng/-112.066201/list/1581857/add/3960+S+MIDLAND+DR+%23A-12/city/Roy/state/UT/zip/84067', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">3960 S Midland Dr  #A-12</a></td>
+                                <td  align="left">Roy</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/weber/parcel_id/010011001/report_listno/1581857" title="Tax Data"></a>        <a class="view-property-tour" href="javascript:;" onclick="jQuery.browserbox('show', 'Property Tour for MLS #1581857', '/report/display/report/photo/listno/1581857/type/1/in_pop/1/pub/0', {menu : {pdf : bbOnPdf, email : bbOnEmail},});" listhub_id="view-virtual-tour" title="Property Tour"></a>    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1587449" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1587449/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1587449', '/report/display/report/full/type/1/in_pop/1/listno/1587449/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1587449_pop'); }});return false;;this.style.color='#000'">1587449</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1587449_da4b016ba8a2b3dfad7db837fc3fe8bc_2085190.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1587449_da4b016ba8a2b3dfad7db837fc3fe8bc_2085190.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(25900)">$25,900</a></td>
+                                <td  align="right">854</td>
+                                <td  align="center">2</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">1</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1587449 &amp;raquo; 3800 S 1900 W #56 &amp;raquo; Roy, UT 84067', '/mapping/gmapf/show_address/1/lat/41.193774/lng/-112.023124/list/1587449/add/3800+S+1900+W+%2356/city/Roy/state/UT/zip/84067', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">3800 S 1900 W  #56</a></td>
+                                <td  align="left">Roy</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1587006" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1587006/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1587006', '/report/display/report/full/type/1/in_pop/1/listno/1587006/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1587006_pop'); }});return false;;this.style.color='#000'">1587006</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1587006_fb72edd189fbe411b00fce12554e1504_6402806.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1587006_fb72edd189fbe411b00fce12554e1504_6402806.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(26500)">$26,500</a></td>
+                                <td  align="right">840</td>
+                                <td  align="center">2</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">4</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1587006 &amp;raquo; 1145 W BARBERRY DR #128 &amp;raquo; Salt Lake City, UT 84123', '/mapping/gmapf/show_address/1/lat/40.669085/lng/-111.924559/list/1587006/add/1145+W+BARBERRY+DR+%23128/city/Salt+Lake+City/state/UT/zip/84123', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">1145 W Barberry Dr  #128</a></td>
+                                <td  align="left">Salt Lake City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1579043" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1579043/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1579043', '/report/display/report/full/type/1/in_pop/1/listno/1579043/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1579043_pop'); }});return false;;this.style.color='#000'">1579043</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1579043_6f74063ee256f94e3f336cfd07ea9d3f_34537.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1579043_6f74063ee256f94e3f336cfd07ea9d3f_34537.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(27000)">$27,000</a></td>
+                                <td  align="right">1,100</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">44</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1579043 &amp;raquo; 5100 S 1050  W #182 A &amp;raquo; Riverdale, UT 84405', '/mapping/gmapf/show_address/1/lat/41.170202/lng/-112.002700/list/1579043/add/5100+S+1050++W+%23182+A/city/Riverdale/state/UT/zip/84405', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">5100 S 1050  W  #182 A</a></td>
+                                <td  align="left">Riverdale</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                <a class="view-property-tour" href="javascript:;" onclick="jQuery.browserbox('show', 'Property Tour for MLS #1579043', '/report/display/report/photo/listno/1579043/type/1/in_pop/1/pub/0', {menu : {pdf : bbOnPdf, email : bbOnEmail},});" listhub_id="view-virtual-tour" title="Property Tour"></a>    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1585509" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1585509/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1585509', '/report/display/report/full/type/1/in_pop/1/listno/1585509/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1585509_pop'); }});return false;;this.style.color='#000'">1585509</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1585509_29856b923fe6601156fd2ec64ced63b3_4511439.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1585509_29856b923fe6601156fd2ec64ced63b3_4511439.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(27900)">$27,900</a></td>
+                                <td  align="right">980</td>
+                                <td  align="center">2</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">10</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1585509 &amp;raquo; 1206 W MEADOW STREAM RD #1206 &amp;raquo; West Valley City, UT 84119', '/mapping/gmapf/show_address/1/lat/40.691413/lng/-111.926793/list/1585509/add/1206+W+MEADOW+STREAM+RD+%231206/city/West+Valley+City/state/UT/zip/84119', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">1206 W Meadow Stream Rd  #1206</a></td>
+                                <td  align="left">West Valley City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1584995" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1584995/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1584995', '/report/display/report/full/type/1/in_pop/1/listno/1584995/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1584995_pop'); }});return false;;this.style.color='#000'">1584995</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1584995_bbeb4fa008d0574657f3e216c2699c60_4097497.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1584995_bbeb4fa008d0574657f3e216c2699c60_4097497.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(28000)">$28,000</a></td>
+                                <td  align="right">924</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">13</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1584995 &amp;raquo; 1194 W PARROTT ST #118 &amp;raquo; Salt Lake City, UT 84123', '/mapping/gmapf/show_address/1/lat/40.688029/lng/-111.926082/list/1584995/add/1194+W+PARROTT+ST+%23118/city/Salt+Lake+City/state/UT/zip/84123', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">1194 W Parrott St  #118</a></td>
+                                <td  align="left">Salt Lake City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1571189" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1571189/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1571189', '/report/display/report/full/type/1/in_pop/1/listno/1571189/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1571189_pop'); }});return false;;this.style.color='#000'">1571189</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1571189_721a7e44dd86ce3096589b8b62a249bf_1624824.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1571189_721a7e44dd86ce3096589b8b62a249bf_1624824.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(29000)">$29,000</a></td>
+                                <td  align="right">924</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">99</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1571189 &amp;raquo; 2600 N HILL FEILD  #24 &amp;raquo; Layton, UT 84041', '/mapping/gmapf/show_address/1/lat/41.097525/lng/-111.973420/list/1571189/add/2600+N+HILL+FEILD++%2324/city/Layton/state/UT/zip/84041', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">2600 N Hill Feild   #24</a></td>
+                                <td  align="left">Layton</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1584380" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1584380/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1584380', '/report/display/report/full/type/1/in_pop/1/listno/1584380/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1584380_pop'); }});return false;;this.style.color='#000'">1584380</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1584380_d40671f49feb72f526dabe263b52d6bb_790762.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1584380_d40671f49feb72f526dabe263b52d6bb_790762.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(32000)">$32,000</a></td>
+                                <td  align="right">960</td>
+                                <td  align="center">2</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">15</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1584380 &amp;raquo; 303  HARRIGER WAY   &amp;raquo; Layton, UT 84041', '/mapping/gmapf/show_address/1/lat/41.100939/lng/-111.964860/list/1584380/add/303++HARRIGER+WAY++/city/Layton/state/UT/zip/84041', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">303  Harriger Way  </a></td>
+                                <td  align="left">Layton</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1581711" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1581711/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1581711', '/report/display/report/full/type/1/in_pop/1/listno/1581711/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1581711_pop'); }});return false;;this.style.color='#000'">1581711</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1581711_8f52729a380bb75bd9d50a8f8cee05d1_83334.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1581711_8f52729a380bb75bd9d50a8f8cee05d1_83334.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(32500)">$32,500</a></td>
+                                <td  align="right">1,000</td>
+                                <td  align="center">2</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">29</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1581711 &amp;raquo; 240 E 1100 N &amp;raquo; North Salt Lake, UT 84054', '/mapping/gmapf/show_address/1/lat/40.861357/lng/-111.905253/list/1581711/add/240+E+1100+N/city/North+Salt+Lake/state/UT/zip/84054', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">240 E 1100 N</a></td>
+                                <td  align="left">North Salt Lake</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1557101" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1557101/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1557101', '/report/display/report/full/type/1/in_pop/1/listno/1557101/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1557101_pop'); }});return false;;this.style.color='#000'">1557101</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1557101_35be3f86ca4853bb34e4a083321bb548_2845004.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1557101_35be3f86ca4853bb34e4a083321bb548_2845004.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(33000)">$33,000</a></td>
+                                <td  align="right">700</td>
+                                <td  align="center">2</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">176</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1557101 &amp;raquo; 3800 S 1900 W #67 &amp;raquo; Roy, UT 84067', '/mapping/gmapf/show_address/1/lat/41.193774/lng/-112.023124/list/1557101/add/3800+S+1900+W+%2367/city/Roy/state/UT/zip/84067', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">3800 S 1900 W  #67</a></td>
+                                <td  align="left">Roy</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1584838" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1584838/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1584838', '/report/display/report/full/type/1/in_pop/1/listno/1584838/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1584838_pop'); }});return false;;this.style.color='#000'">1584838</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1584838_1ccaaefb81698cb12917eb4a82d36ac4_2793444.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1584838_1ccaaefb81698cb12917eb4a82d36ac4_2793444.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(35000)">$35,000</a></td>
+                                <td  align="right">1,096</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">14</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1584838 &amp;raquo; 1082 W FOXGLOVE DR &amp;raquo; Taylorsville, UT 84123', '/mapping/gmapf/show_address/1/lat/40.669937/lng/-111.921532/list/1584838/add/1082+W+FOXGLOVE+DR/city/Taylorsville/state/UT/zip/84123', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">1082 W Foxglove Dr</a></td>
+                                <td  align="left">Taylorsville</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1586358" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1586358/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1586358', '/report/display/report/full/type/1/in_pop/1/listno/1586358/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1586358_pop'); }});return false;;this.style.color='#000'">1586358</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1586358_c07b8db4fc740efc645c26219a3dba56_7627945.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1586358_c07b8db4fc740efc645c26219a3dba56_7627945.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(35000)">$35,000</a></td>
+                                <td  align="right">784</td>
+                                <td  align="center">2</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">6</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1586358 &amp;raquo; 17 W LAKEVIEW DR &amp;raquo; Layton, UT 84041', '/mapping/gmapf/show_address/1/lat/41.100108/lng/-111.968963/list/1586358/add/17+W+LAKEVIEW+DR/city/Layton/state/UT/zip/84041', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">17 W Lakeview Dr</a></td>
+                                <td  align="left">Layton</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                <a class="view-property-tour" href="javascript:;" onclick="open_popup_win('http://www.exite-listings.com/wfrmls/1586358', 800, 620, 1, 'tour_1586358');" listhub_id="view-virtual-tour" title="Property Tour"></a>    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1561722" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1561722/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1561722', '/report/display/report/full/type/1/in_pop/1/listno/1561722/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1561722_pop'); }});return false;;this.style.color='#000'">1561722</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1561722_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1561722_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(35000)">$35,000</a></td>
+                                <td  align="right">1,260</td>
+                                <td  align="center">2</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">154</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1561722 &amp;raquo; 201  HEBER AVE #206E &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1561722/add/201++HEBER+AVE+%23206E/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #206E</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC2061AM/report_listno/1561722" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1577107" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1577107/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1577107', '/report/display/report/full/type/1/in_pop/1/listno/1577107/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1577107_pop'); }});return false;;this.style.color='#000'">1577107</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1577107_8d17426a187afa1faaaf82937255d555_84234.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1577107_8d17426a187afa1faaaf82937255d555_84234.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(35000)">$35,000</a></td>
+                                <td  align="right">1,400</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">55</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1577107 &amp;raquo; 705 S REDWOOD ROAD RD #21 &amp;raquo; Salt Lake City, UT 84104', '/mapping/gmapf/show_address/1/lat/40.753957/lng/-111.936638/list/1577107/add/705+S+REDWOOD+ROAD+RD+%2321/city/Salt+Lake+City/state/UT/zip/84104', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">705 S Redwood Road Rd  #21</a></td>
+                                <td  align="left">Salt Lake City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1587250" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1587250/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1587250', '/report/display/report/full/type/1/in_pop/1/listno/1587250/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1587250_pop'); }});return false;;this.style.color='#000'">1587250</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/nophoto.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/nophoto.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(37000)">$37,000</a></td>
+                                <td  align="right">924</td>
+                                <td  align="center">2</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">1</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1587250 &amp;raquo; 4577 S YARROW LN #88 &amp;raquo; Taylorsville, UT 84123', '/mapping/gmapf/show_address/1/lat/40.669871/lng/-111.923174/list/1587250/add/4577+S+YARROW+LN+%2388/city/Taylorsville/state/UT/zip/84123', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">4577 S Yarrow Ln  #88</a></td>
+                                <td  align="left">Taylorsville</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1583310" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1583310/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1583310', '/report/display/report/full/type/1/in_pop/1/listno/1583310/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1583310_pop'); }});return false;;this.style.color='#000'">1583310</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1583310_d2ae8a0d5305c038d2bed02913fe9db7_130690.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1583310_d2ae8a0d5305c038d2bed02913fe9db7_130690.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(37589)">$37,589</a></td>
+                                <td  align="right">1,056</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">21</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1583310 &amp;raquo; 1823 N 210 E &amp;raquo; Tooele, UT 84074', '/mapping/gmapf/show_address/1/lat/40.563031/lng/-112.293340/list/1583310/add/1823+N+210+E/city/Tooele/state/UT/zip/84074', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">1823 N 210 E</a></td>
+                                <td  align="left">Tooele</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1587143" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1587143/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1587143', '/report/display/report/full/type/1/in_pop/1/listno/1587143/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1587143_pop'); }});return false;;this.style.color='#000'">1587143</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1587143_c2f5987792ff1c1bf4752df9fbc655e7_92313.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1587143_c2f5987792ff1c1bf4752df9fbc655e7_92313.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(38000)">$38,000</a></td>
+                                <td  align="right">840</td>
+                                <td  align="center">2</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">2</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1587143 &amp;raquo; 1111 N 2000 W #42 &amp;raquo; Farr West, UT 84404', '/mapping/gmapf/show_address/1/lat/41.278137/lng/-112.032014/list/1587143/add/1111+N+2000+W+%2342/city/Farr+West/state/UT/zip/84404', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">1111 N 2000 W  #42</a></td>
+                                <td  align="left">Farr West</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/weber/parcel_id/000047045/report_listno/1587143" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1509094" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1509094/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1509094', '/report/display/report/full/type/1/in_pop/1/listno/1509094/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1509094_pop'); }});return false;;this.style.color='#000'">1509094</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1509094_07063f3167e68257a11f0abe7d4f50e5_75609.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1509094_07063f3167e68257a11f0abe7d4f50e5_75609.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(39000)">$39,000</a></td>
+                                <td  align="right">1,163</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">247</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1509094 &amp;raquo; 8400 S 4000 W #204 &amp;raquo; West Jordan, UT 84088', '/mapping/gmapf/show_address/1/lat/40.597309/lng/-111.980235/list/1509094/add/8400+S+4000+W+%23204/city/West+Jordan/state/UT/zip/84088', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">8400 S 4000 W  #204</a></td>
+                                <td  align="left">West Jordan</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/salt+lake/parcel_id/2132351001/report_listno/1509094" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1580222" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1580222/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1580222', '/report/display/report/full/type/1/in_pop/1/listno/1580222/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1580222_pop'); }});return false;;this.style.color='#000'">1580222</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1580222_7571e57cc04f5eba1e0b3fac35e7879e_6563311.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1580222_7571e57cc04f5eba1e0b3fac35e7879e_6563311.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(39900)">$39,900</a></td>
+                                <td  align="right">840</td>
+                                <td  align="center">0</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">39</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1580222 &amp;raquo; 1700 N MAIN STREET ST #45 &amp;raquo; Cedar City, UT 84721', '/mapping/gmapf/show_address/1/lat/37.655862/lng/-113.077513/list/1580222/add/1700+N+MAIN+STREET+ST+%2345/city/Cedar+City/state/UT/zip/84721', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">1700 N Main Street St  #45</a></td>
+                                <td  align="left">Cedar City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+                    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1579242" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1579242/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1579242', '/report/display/report/full/type/1/in_pop/1/listno/1579242/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1579242_pop'); }});return false;;this.style.color='#000'">1579242</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1579242_cf0039c0f4b6a0f5ef30cfd535712df0_4377137.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1579242_cf0039c0f4b6a0f5ef30cfd535712df0_4377137.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(39900)">$39,900</a></td>
+                                <td  align="right">1,023</td>
+                                <td  align="center">0</td>
+                                <td  align="right">0.00</td>
+                                <td  align="right">40</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1579242 &amp;raquo; 195 W 200 ST &amp;raquo; Centerfield, UT 84622', '/mapping/gmapf/show_address/1/lat/39.130378/lng/-111.823494/list/1579242/add/195+W+200+ST/city/Centerfield/state/UT/zip/84622', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">195 W 200 St</a></td>
+                                <td  align="left">Centerfield</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/sanpete/parcel_id/3420/report_listno/1579242" title="Tax Data"></a>        <a class="view-property-tour" href="javascript:;" onclick="open_popup_win('http://www.circlepix.com/tours/5?wfrnum=1579242', 800, 620, 1, 'tour_1579242');" listhub_id="view-virtual-tour" title="Property Tour"></a>    </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1583717" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1583717/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1583717', '/report/display/report/full/type/1/in_pop/1/listno/1583717/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1583717_pop'); }});return false;;this.style.color='#000'">1583717</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1583717_d712159fce30cde3fb3011769cce2260_108353.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1583717_d712159fce30cde3fb3011769cce2260_108353.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(40000)">$40,000</a></td>
+                                <td  align="right">943</td>
+                                <td  align="center">3</td>
+                                <td  align="right">1.00</td>
+                                <td  align="right">19</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1583717 &amp;raquo; 157  BERKLEY  &amp;raquo; East Carbon, UT 84520', '/mapping/gmapf/show_address/1/lat/39.547958/lng/-110.413612/list/1583717/add/157++BERKLEY+/city/East+Carbon/state/UT/zip/84520', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">157  Berkley </a></td>
+                                <td  align="left">East Carbon</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/carbon/parcel_id/1C05750000/report_listno/1583717" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1561853" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1561853/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1561853', '/report/display/report/full/type/1/in_pop/1/listno/1561853/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1561853_pop'); }});return false;;this.style.color='#000'">1561853</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1561853_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1561853_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(40000)">$40,000</a></td>
+                                <td  align="right">2,424</td>
+                                <td  align="center">3</td>
+                                <td  align="right">4.00</td>
+                                <td  align="right">154</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1561853 &amp;raquo; 201  HEBER AVE #504C &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1561853/add/201++HEBER+AVE+%23504C/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #504C</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC5041AM/report_listno/1561853" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1561727" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1561727/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1561727', '/report/display/report/full/type/1/in_pop/1/listno/1561727/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1561727_pop'); }});return false;;this.style.color='#000'">1561727</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1561727_cb469606fdd6c8c9798341b39b2360ab_399864.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1561727_cb469606fdd6c8c9798341b39b2360ab_399864.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(40000)">$40,000</a></td>
+                                <td  align="right">1,981</td>
+                                <td  align="center">3</td>
+                                <td  align="right">3.00</td>
+                                <td  align="right">154</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1561727 &amp;raquo; 201  HEBER AVE #401501 &amp;raquo; Park City, UT 84060', '/mapping/gmapf/show_address/1/lat/40.646416/lng/-111.496854/list/1561727/add/201++HEBER+AVE+%23401501/city/Park+City/state/UT/zip/84060', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">201  Heber Ave  #401501</a></td>
+                                <td  align="left">Park City</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/summit/parcel_id/USC4011AM/report_listno/1561727" title="Tax Data"></a>            </td>
+</tr>                                    <tr>
+    <td style="text-align: center;">
+        <input type="checkbox" class="selListingChk" name="Listing" value="1586835" onclick="toggleListing(this)" />
+    </td>
+    <td >
+        <a title="View property history" href="/report/display/report/full/type/1/in_pop/1/listno/1586835/force//actor/" onclick="jQuery.browserbox('show', 'MLS #: 1586835', '/report/display/report/full/type/1/in_pop/1/listno/1586835/force//actor/', {menu : {pdf: bbOnPdf, email: bbOnEmail},width: 900,height: 550,afterThisLocationLoaded:function(){SlideShowLoader.resetShow('1586835_pop'); }});return false;;this.style.color='#000'">1586835</a>    </td>
+                        <td ><a href="javascript:;" onmouseover="balloon.showTooltip(event,'<img src=\'https://assets.utahrealestate.com/photos/280x210/1586835_278b5194ad735fcf71015b433aca3439_169984.jpg\' border=\'1\' />', 0, {'width': 282, 'height': 212})">
+                        <img src="https://assets.utahrealestate.com/photos/65x50/1586835_278b5194ad735fcf71015b433aca3439_169984.jpg" style="width: 37px; height: auto; border: 0;" alt="House thumbnail" />
+                        </a></td>
+                                <td >A</td>
+                                <td  align="right"><a title="Click for Mortgage Calculator" href="javascript:;" onclick="displayMortgageCalculator(40500)">$40,500</a></td>
+                                <td  align="right">1,502</td>
+                                <td  align="center">3</td>
+                                <td  align="right">2.00</td>
+                                <td  align="right">5</td>
+                                <td  align="left"><a href="javascript:;" title="View Map" onclick="jQuery.browserbox('show', 'MLS #1586835 &amp;raquo; 70 E CENTER ST &amp;raquo; Huntington, UT 84528', '/mapping/gmapf/show_address/1/lat/39.326141/lng/-110.962935/list/1586835/add/70+E+CENTER+ST/city/Huntington/state/UT/zip/84528', {width:850,height:520,menu : { pdf : bbOnPdfMap }});" listhub_id = "view-map">70 E Center St</a></td>
+                                <td  align="left">Huntington</td>
+                                <td ></td>
+                <td style="text-align: left;">
+        <a class="view-tax-data" href="/taxdata/details/c/emery/parcel_id/0101910025/report_listno/1586835" title="Tax Data"></a>            </td>
+</tr>                                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="display: none">
+        <img src="http://hit.wfrmls.com/index/hit/listnos/1505790-1571868-1505782-1571864-1505776-1505772-1505718-1571796-1571789-1571786-1571757-1571858-1570148-1579433-1587159-1421652-1521075-1553384-1587184-1553586-1582939-1562660-1581776-1575111-1576204-1586494-1581857-1587449-1587006-1579043-1585509-1584995-1571189-1584380-1581711-1557101-1584838-1586358-1561722-1577107-1587250-1583310-1587143-1509094-1580222-1579242-1583717-1561853-1561727-1586835/bucket/17" alt="" />
+    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                    
+            </div><!-- END #wrap -->
+        </div><!-- END #wrap-wrapper -->
+
+
+        <div id="copyright_footer">
+            <div class="gutter">
+                <div class="left-col">
+                    <button type="button" class="btn btn-secondary" style="float:right;" onclick="document.getElementById('top-of-page').scrollIntoView(); ">Back to Top</button>
+                    <p>Copyright &copy; 2019 UtahRealEstate.com. All Rights Reserved. Information not guaranteed.</p>
+                    <p>All data, including all measurements and calculations of area, is obtained from various sources and has not been, and will not be, verified by broker or MLS. All information should be independently reviewed and verified for accuracy.</p>
+                    <p>
+                        <a class="equal-housing" href="http://portal.hud.gov/portal/page/portal/HUD/program_offices/fair_housing_equal_opp" target="_blank" title="Equal Housing Opportunity">Equal Housing Opportunity</a>&nbsp;
+                        |&nbsp;<a href="/index/about.us">About Us</a>&nbsp;
+                        |&nbsp;<a href="//blog.utahrealestate.com/" target="_blank">Blog</a>&nbsp;
+                        |&nbsp;<a href="/index/accessibility">Accessibility</a>&nbsp;
+                        |&nbsp;<a href="/page/do/dmca.notice">DMCA Notice</a>&nbsp;
+                        |&nbsp;<a href="/page/do/privacy.policy">Privacy Policy</a>&nbsp;
+                        |&nbsp;<a href="/page/do/member.eula">EULA</a>&nbsp;
+                        |&nbsp;<a href="#" onclick="Email.ShowForm('Support Email', {subject: 'COMMENTS TO SUPPORT', to:'support@utahrealestate.com', to_name:'Support', text_name:'Your comments to the <b>Support</b>', include_agent_info:true}); return false;" title="Send an email to support" class="email-webmaster">Email Support</a>&nbsp;
+                    </p>
+                </div>
+            </div>
+        </div>
+                <div id="help_content_div" style="display: none;"></div>
+        <div id="mini_notify" class="mini_notify_error">I am mister notify</div>
+                    <script type="text/javascript">
+                if (document.getElementById('toolbar-wrap')){
+                    jQuery(document).ready(function(){
+                                                jQuery('#toolbar-wrap').scrolldiv({
+                            disableFixedPositioning : false                        });
+                    });
+                }
+            </script>
+                     
+        
+                    <!-- On Content Ready Events -->
+            <script type="text/javascript">
+                // Session Init (puts the initial numbers)
+                Authenticate.sessionInit();
+                jQuery(window).load( function(){ Authenticate.sessionStart(); });
+                // Register Global Ajax Events
+                jQuery(document).ajaxError(AjaxHandlers.onError);
+                jQuery(document).ajaxSuccess(Authenticate.resetSessionCounter);
+                // Register Global YUI Ajax Events
+                YAHOO.util.Connect.successEvent.subscribe(Authenticate.onConnectionSuccess);
+            </script>
+        
+                    
+        <script type="text/javascript">
+    //<![CDATA[
+
+            var balloon = new Balloon();
+            YAHOO.util.Event.addListener(self, 'load', autoToggle);
+            //]]>
+</script>
+<script type="text/javascript" src="/min/?g=saved_search_js&amp;1551989936"></script>
+<script type="text/javascript">
+    //<![CDATA[
+
+            (function($){
+                toggleReportSelection(0);
+            })(jQuery);
+            var _MAXIMUM_EXPORT_COUNT_ = 600;    //]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+
+            $(document).ready(function(){
+                // Floating Scrollbar intantiation
+                $('#search-results-table').floatingScroll();
+            });
+            //]]>
+</script>
+<script type="text/javascript" src="/js/site/mapper.js?1551989936"></script>
+        <script type="text/javascript">
+            function dismissNotification( notification_id, element ) {
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '/index/dismiss.notification',
+                    data: 'notification_id='+notification_id, 
+                    success: function() {
+                        jQuery(element).parent().hide();
+                    }
+                });
+                return false;
+            }
+                            
+            // Initialize the "speedbar" functionality in the masthead
+            SpeedbarWidget.init("https://v8services.utahrealestate.com");
+        </script>
+
+                                <script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-3153503-1']);
+_gaq.push(['_setDomainName', '.utahrealestate.com']);
+_gaq.push(['_setCampSourceKey', 'utm_source']);
+_gaq.push(['_setCampMediumKey', 'utm_medium']);
+_gaq.push(['_setCampContentKey', 'utm_keyword']);
+_gaq.push(['_setCampTermKey', 'utm_keyword']);
+_gaq.push(['_setCampNameKey', 'utm_campaign']);
+_gaq.push(['_setVar', 'Member'], ['_trackPageview']);
+
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 995503080;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+
+<script async type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+            
+            <noscript>
+                <div style="display:inline;">
+                    <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/995503080/?value=0&amp;guid=ON&amp;script=0"/>
+                </div>
+            </noscript>
+            </body>
+</html>

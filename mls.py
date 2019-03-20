@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import csv
-import data
+import scrape
 
 csv_file = open('mls_scrape.csv', 'a')
 csv_writer = csv.writer(csv_file)
@@ -113,7 +113,7 @@ ROWS = [
 with open('test3.html') as html_file:
     soup = BeautifulSoup(html_file, 'lxml')
 
-DATA = data.set_variables(soup)
+DATA = data.scrape_report(soup)
 
 # csv_writer.writerow(ROWS)
 csv_writer.writerow(DATA)

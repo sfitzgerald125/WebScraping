@@ -1,7 +1,14 @@
 from bs4 import BeautifulSoup
 import re
 
-def set_variables(soup):
+
+def grab_reports():
+    return LIST_URLS
+
+def next_page():
+    retun Page_link
+
+def scrape_report(soup):
     default_value = None
     # start assigning vars
     try:
