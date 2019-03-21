@@ -3,23 +3,21 @@ import re
 import requests
 
 class scrappy:
+    HEADERS = {}
+    urls = []
+    page = 1 # set to page 1 for the start
+
     def __init__(self, cookie, host, user_agent):
         self.HEADERS['Cookie'] = cookie
         self.HEADERS['Host'] = host
         self.HEADERS['User-Agent'] = user_agent
-
-    HEADERS = {}
-
-    urls = []
-    page = 1 # set to page 1 for the start
     
-    def request_next_page(self, pageNum):
+    def request_next_page(self):
         with requests.Session() as s:
-            url = f'https://www.utahrealestate.com/search/perform/md/undefined/recent/1?page={self.page}'
+            url = f'https://www.utahrealestate.com/search/perform/md/3ff38b95fd89a31bdd1a02d886df8a88/recent/1?page={self.page}'
             r = s.get(url, headers=self.HEADERS)
             soup = BeautifulSoup(r.content, 'lxml')
             self.page += 1
-            print(url)
         return soup
 
     def append_urls(self, soup):        

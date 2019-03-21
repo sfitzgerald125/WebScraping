@@ -19,32 +19,40 @@ ROWS = [
     'l_office', 'l_broker', 'bac', 'dual_var', 'list_type', 'comm_type', 'wthdrwn_dt', 'off_mkt_dt', 'exp_dt',
 ]
 
-cookie = '__utmc=41202813; __utmz=41202813.1553106212.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); ureBrowserSession=1553123150368895489500; _gcl_au=1.1.1217016442.1553123151; __utma=41202813.623660756.1553106212.1553116294.1553123151.3; __gads=ID=2c13cb39f6d4b3b5:T=1553123150:S=ALNI_MY5y4hpO7v9WKtYXQaelQ9cTbj0pA; _ga=GA1.2.623660756.1553106212; _gid=GA1.2.2135618890.1553123153; __qca=P0-1804500325-1553123154710; OX_plg=pm; ureServerSession=1553123150368895489500; PHPSESSID=j93697h1k28f4l1c9b2oj5gai2; btpdb.6EeDEhH.dGZjLjQ4NTE4NA=UkVRVUVTVFMuMTI; HELP_RIGHTS=1; __utmv=41202813.Member; __utmt=1; __utmb=41202813.24.10.1553123151'
+cookie = '__utmc=41202813; __utmz=41202813.1553106212.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); _gcl_au=1.1.1217016442.1553123151; __gads=ID=2c13cb39f6d4b3b5:T=1553123150:S=ALNI_MY5y4hpO7v9WKtYXQaelQ9cTbj0pA; _ga=GA1.2.623660756.1553106212; _gid=GA1.2.2135618890.1553123153; __qca=P0-1804500325-1553123154710; OX_plg=pm; ureServerSession=1553125711839953766500; ureBrowserSession=1553125711839953766500; PHPSESSID=91giq3idmjhdcdcfsc8hivg0t4; __utma=41202813.623660756.1553106212.1553123151.1553135119.4; __utmt=1; btpdb.6EeDEhH.dGZjLjQ4NTE4NA=UkVRVUVTVFMuMTM; HELP_RIGHTS=1; __utmv=41202813.Member; __utmb=41202813.4.10.1553135119'
 host = 'www.utahrealestate.com'
 user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
 
 myScraper = classes.scrappy(cookie,host,user_agent)
 
-# collect all urls on page 1
-soup = myScraper.request_next_page(myScraper.page)
-# turn page
-myScraper.append_urls(soup)
+# collect all urls on all pages
+while myScraper.page <= 358:
+    print("page: " + myScraper.page) # just see progress as we go through all 356 pages
+    soup = myScraper.request_next_page()
+    myScraper.append_urls(soup)
 
-# once all urls are done then scrape each url
+csv_file = open('mls_urls', 'w')
+csv_writer = csv.writer(csv_file)
+
 URLS = myScraper.urls
+
+print("printing urls to csv file")
 for url in URLS:
-    data = myScraper.scrape_report(url)
+    csv_writer.writerow(url)
 
-
-
-
-# while myScraper.next_page <= 2:
-
-
-# DATA = myScraper.scrape_report(soup)
-
-# csv_file = open('mls_scrape.csv', 'a')
+# csv_file = open('mls_scrape.csv', 'w')
 # csv_writer = csv.writer(csv_file)
-# csv_writer.writerow(scrape.ROWS)
-# csv_writer.writerow(DATA)
-# csv_file.close()
+# csv_writer.writerow(ROWS)
+
+# once all urls are done then scrape each url and place data into csv
+# URLS = myScraper.urls
+
+# i = 0
+# for url in URLS:
+#     data = myScraper.scrape_report(url)
+#     csv_writer.writerow(data)
+#     if i%10 == 0:
+#         print(i)
+#     i += 1
+
+csv_file.close()
