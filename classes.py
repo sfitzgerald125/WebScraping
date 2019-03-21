@@ -7,12 +7,8 @@ class scrappy:
         self.HEADERS['Cookie'] = cookie
         self.HEADERS['Host'] = host
         self.HEADERS['User-Agent'] = user_agent
-        
-    HEADERS = {
-        'Cookie': '__utmc=41202813; __utmz=41202813.1553106212.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); ureBrowserSession=1553123150368895489500; _gcl_au=1.1.1217016442.1553123151; __utma=41202813.623660756.1553106212.1553116294.1553123151.3; __gads=ID=2c13cb39f6d4b3b5:T=1553123150:S=ALNI_MY5y4hpO7v9WKtYXQaelQ9cTbj0pA; _ga=GA1.2.623660756.1553106212; _gid=GA1.2.2135618890.1553123153; __qca=P0-1804500325-1553123154710; OX_plg=pm; ureServerSession=1553123150368895489500; PHPSESSID=j93697h1k28f4l1c9b2oj5gai2; btpdb.6EeDEhH.dGZjLjQ4NTE4NA=UkVRVUVTVFMuMTI; HELP_RIGHTS=1; __utmv=41202813.Member; __utmt=1; __utmb=41202813.24.10.1553123151',
-        'Host': 'www.utahrealestate.com',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36',
-    }
+
+    HEADERS = {}
 
     urls = []
     page = 1 # set to page 1 for the start
