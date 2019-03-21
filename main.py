@@ -5,11 +5,11 @@ import classes
 import re
 
 myScraper = classes.scrappy()
-soup = myScraper.request_next_page(myScraper.next_page)
 
-myScraper.grab_urls(soup)
+while myScraper.next_page < 2:
+    soup = myScraper.request_next_page(myScraper.next_page)
+    myScraper.grab_urls(soup)
 
-print(len(myScraper.URLS))
 
 # DATA = myScraper.scrape_report(soup)
 

@@ -120,6 +120,7 @@ class scrappy:
             r = s.get(url, headers=self.HEADERS)
             soup = BeautifulSoup(r.content, 'lxml')
             self.next_page += 1
+            print(url)
         return soup
 
     def grab_urls(self, soup):        
