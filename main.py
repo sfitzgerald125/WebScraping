@@ -5,22 +5,13 @@ import classes
 import re
 
 myScraper = classes.scrappy()
+soup = myScraper.request_next_page(myScraper.next_page)
 
-i = 0
-while i < 2:
-    myScraper.update_next_page()
-    print(myScraper.next_page)
-    i += 1
+myScraper.grab_urls(soup)
 
+print(len(myScraper.URLS))
 
-# with open('list.html') as list_html:
-#     soup = BeautifulSoup(list_html, 'lxml')
-
-
-# with open('test3.html') as html_file:
-#     soup = BeautifulSoup(html_file, 'lxml')
-
-# DATA = scrape.scrape_report(soup)
+# DATA = myScraper.scrape_report(soup)
 
 # csv_file = open('mls_scrape.csv', 'a')
 # csv_writer = csv.writer(csv_file)
