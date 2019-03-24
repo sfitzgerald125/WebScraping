@@ -478,7 +478,11 @@ class scrappy:
             agt_remarks = default_value
             
         # table7 vars
-        table7 = table6.find_next("table")
+        try:
+            table7 = table6.find_next("table")
+        except Exception as e:
+            table7 = default_value
+
         try:
             show_inst = table7.find(string=re.compile("Show Inst:")).find_next("td").text
         except Exception as e:
@@ -520,7 +524,11 @@ class scrappy:
             l_broker = default_value
 
         # table8 vars
-        table8 = table7.find_next("table")
+        try:
+            table8 = table7.find_next("table")
+        except Exception as e:
+            table8 = default_value
+            
         try:
             bac = table8.find(string=re.compile("BAC:")).find_next("td").text
         except Exception as e:
